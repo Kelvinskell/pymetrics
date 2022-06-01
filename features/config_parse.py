@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import sys
 import yaml
 from yaml import scanner
 from yaml import parser
@@ -15,6 +16,12 @@ class YamlParser():
             try:
                 configuration = yaml.safe_load(file)
             except (scanner.ScannerError, parser.ParserError):
-                return "pymetrics: Error: Unable to parse YAML. \nMalformed configuration file."
+                print("pymetrics: Error: Unable to parse YAML. \nMalformed configuration file.")
+                return False
+            except:
+                print("pymetrics: Error: Cowardly refusing to parse file. \nUnkown Error detected")
+                return False
+            if not bool(configuration):
+                print("pymetrics: Error: Empty or damaged configuration file")
+                return False
             return configuration
-
