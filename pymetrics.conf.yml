@@ -39,12 +39,10 @@ expire_logs:
 
 notify:
   # Email log report
-  True
-  # False
+  False
+  # True
 email_address:
-  kelvinskell@gmail.com
   # Your email address
-  # None (Use this value if notify is False
 
 web_server:
   logs:

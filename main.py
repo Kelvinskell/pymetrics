@@ -52,3 +52,15 @@ if args.test or args.T:
     else:
         print(f"The configuration file {config_file} has bad syntax")
         sys.exit(1)
+
+# Load parsed values
+log_files = parsed_values["log_files"]
+log_format = parsed_values["log_report_format"]
+delete_logs = parsed_values["delete_logs"]
+expire_logs = parsed_values["expire_logs"]
+notify = parsed_values["notify"]
+email_address = parsed_values["email_address"]
+alert = parsed_values["alert"]
+web_log = parsed_values["web_server"]["logs"]
+web_data = parsed_values["web_server"]["data"]
+values = [log_files, log_format, delete_logs, expire_logs, notify, email_address, alert, web_log, web_data]
