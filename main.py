@@ -6,6 +6,10 @@ import os
 import sys
 from features import config_parse
 
+# Log usage to logs/access.log
+from features import access
+access.WriteToAccessLog().log()
+
 # Create the parser
 parser = argparse.ArgumentParser(prog="pymetrics", description="Collect, analyse and report useful system meyrics", allow_abbrev=False, epilog="Enjoy the program!")
 
