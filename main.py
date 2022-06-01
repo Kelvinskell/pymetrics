@@ -25,7 +25,7 @@ if args.c:
         sys.exit(1)
     config_file = c
 else:
-    config_file = "default.conf.yml"
+    config_file = "pymetrics.conf.yml"
 
 # Read configuration file
 parser_class = config_parse.YamlParser(config_file)
