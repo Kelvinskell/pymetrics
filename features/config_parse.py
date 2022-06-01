@@ -9,6 +9,7 @@ class YamlParser():
     def __init__(self, yaml_file):
         self.yaml_file = yaml_file
 
+    # Convert yaml to python object
     def yaml_to_python(self):
         with open(self.yaml_file) as file:
             try:
@@ -17,6 +18,3 @@ class YamlParser():
                 return "pymetrics: Error: Unable to parse YAML. \nMalformed configuration file."
             return configuration
 
-ex = YamlParser("ex.yml")
-print(ex.yaml_to_python())
-dic = ex.yaml_to_python()
