@@ -48,8 +48,3 @@ if args.test or args.T:
     else:
         print(f"The configuration file {config_file} has bad syntax")
         sys.exit(1)
-
-# Print version
-if args.version:
-    print(args.version)
-    sys.exit()
