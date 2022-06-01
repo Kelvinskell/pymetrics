@@ -9,10 +9,15 @@ from features import config_parse
 # Create the parser
 parser = argparse.ArgumentParser(prog="pymetrics", description="Collect, analyse and report useful system meyrics", allow_abbrev=False, epilog="Enjoy the program!")
 
+# Version
+parser.version = 'pymetrics: version 1.0'
+
 # Add the arguments
 parser.add_argument('-c', metavar='Config_file', action="store", type=str, help="specify alternative yaml configiration file")
 parser.add_argument('-t', '--test', action="store_true", help="test configuration and exit")
 parser.add_argument('-T', action='store_true', help="test configuration file, dump it and exit")
+parser.add_argument('-v', '--version', action='version', help='Print version and exit')
+
 # Execute parse_args method
 args = parser.parse_args()
 
@@ -43,3 +48,8 @@ if args.test or args.T:
     else:
         print(f"The configuration file {config_file} has bad syntax")
         sys.exit(1)
+
+# Print version
+if args.version:
+    print(args.version)
+    sys.exit()
