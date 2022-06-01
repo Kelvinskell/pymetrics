@@ -1,3 +1,65 @@
-
 ---
 # This is the default configuration file for pymetrics
+# Values can be replaced only with the provided options.
+# DO NOT ALTER OR MODIFY KEYS. IF YOU DO SO, THE PROGRAM WILL RUN ERRATICALLY.
+# It is recommended that you first backup this file before altering it.
+
+log_files:
+  # log files to be monitored
+  - /var/log/cron.log
+  - /var/log/auth.log # Debian based
+  - /var/log/secure # Red Hat based
+  - /var/log/syslog # Debian based
+  - /var/log/messages # Red Hat based
+  - /var/log/faillog
+  # AVAILABLE OPTIONS:
+  # /var/log/ufw.log
+  # /var/log/firewalld
+  # /var/log/mail.log
+  # /var/log/maillog
+  # /var/log/boot.log
+  # /var/log/kern.log
+
+log_report_format:
+  plain_text
+  # AVAILABLE FORMATS:
+  # csv
+  # json
+
+delete_logs:
+  # Delete old logs
+  True
+  # False
+expire_logs:
+  # Delete logs older than _ days
+  7
+  # 14
+  # 30
+  # None
+
+notify:
+  # Email log report
+  True
+  # False
+email_address:
+  kelvinskell@gmail.com
+  # Your email address
+  # None (Use this value if notify is False
+
+web_server:
+  logs:
+    - /var/log/nginx
+    - /var/log/apache2 # Debian based
+    - /var/log/httpd # Red Hat based
+  data:
+    - /var/www/nginx
+    - /var/www/apache2
+    - /var/www/httpd
+
+alert:
+  # Instantly alert when system values become critical
+  True
+  # False
+
+# Use the -t option for syntax cjeck
+# Use the -T option for syntax cjwck and printing out the configiration.
