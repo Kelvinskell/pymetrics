@@ -10,7 +10,9 @@ from features import config_parse
 parser = argparse.ArgumentParser(prog="pymetrics", description="Collect, analyse and report useful system meyrics", allow_abbrev=False, epilog="Enjoy the program!")
 
 # Add the arguments
-parser.add_argument('-c', metavar='Config_file', action="store", type=str, help="Specify alternative yaml configiration file")
+parser.add_argument('-c', metavar='Config_file', action="store", type=str, help="specify alternative yaml configiration file")
+parser.add_argument('-t', '--test', action="store_true", help="test configuration and exit")
+parser.add_argument('-T', action='store_true', help="test configuration file, dump it and exit")
 # Execute parse_args method
 args = parser.parse_args()
 
@@ -30,3 +32,14 @@ else:
 # Read configuration file
 parser_class = config_parse.YamlParser(config_file)
 parsed_values = parser_class.yaml_to_python()
+
+# Print configuration
+if args.test or args.T:
+    if parsed_values:
+        print(f"The configuration file {config_file} syntax is ok.", end="\n\n")
+        if args.T:
+            print(parsed_values)
+        sys.exit()
+    else:
+        print(f"The configuration file {config_file} has bad syntax")
+        sys.exit(1)
