@@ -27,6 +27,6 @@ if args.c:
 else:
     config_file = "default.conf.yml"
 
-# Instantiate YamlParser class
+# Read configuration file
 parser_class = config_parse.YamlParser(config_file)
 parsed_values = parser_class.yaml_to_python()
