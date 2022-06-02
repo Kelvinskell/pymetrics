@@ -68,6 +68,7 @@ try:
     alert = parsed_values["alert"]
     web_log = parsed_values["web_server"]["logs"]
     web_data = parsed_values["web_server"]["data"]
+    timeout = parsed_values["timeout"]
     url = parsed_values["url"]
 except KeyError as key:
     print(f"pymetrics: Error: Key {key} is missing in {config_file} \nExitting...")
@@ -90,7 +91,7 @@ if email_address:
 
 # Convert parsed values to a dictionary
 values = {"log_files": log_files, "log_format": log_format, "delete_logs": delete_logs, "expire_logs": expire_logs,
-        "notify": notify, "email": email_address, "alert": alert, "web_log": web_log, "web_data": web_data, "url": url}
+        "notify": notify, "email": email_address, "alert": alert, "web_log": web_log, "web_data": web_data, "url": url, "timeout": timeout}
 
 # Check for Illegal keys in config file
 for key in parsed_values.keys():
