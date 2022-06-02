@@ -87,10 +87,10 @@ if email_address:
 values = {"log_files": log_files, "log_format": log_format, "delete_logs": delete_logs, "expire_logs": expire_logs,
         "notify": notify, "email": email_address, "alert": alert, "web_log": web_log, "web_data": web_data}
 
-# Check for unknown keys
+# Check for Illegal keys in config file
 for key in parsed_values.keys():
     if key not in values.keys():
         if key in ["email_address", "log_report_format", "web_server"]:
             pass
         else:
-            print("pymetrics: Info: Unrecognised key: {} in {}".format(key, config_file))
+            print("pymetrics: Info: Illegal key: {} in {}".format(key, config_file))
