@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 
+# Import modules
 import os
 import psutil
 import socket
 import platform
 import distro
-import psutil
 from datetime import datetime
 from datetime import date
 
