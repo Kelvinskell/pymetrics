@@ -74,7 +74,7 @@ if args.email:
         email_address = args.email
     else:
         print("Email address not valid. \nOmitting...")
-
 # Convert parsed values to a dictionary
 values = {"log_files": log_files, "log_format": log_format, "delete_logs": delete_logs, "expire_logs": expire_logs,
         "notify": notify, "email": email_address, "alert": alert, "web_log": web_log, "web_data": web_data}
+
