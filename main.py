@@ -18,6 +18,7 @@ parser.version = 'pymetrics: version 1.0'
 
 # Add the arguments
 parser.add_argument('-c', metavar='Config_file', action="store", type=str, help="specify alternative yaml configiration file")
+parser.add_argument('-e', '--email', metavar='email_address', action='store', type=str, help='Specify an email address to send report.') 
 parser.add_argument('-t', '--test', action="store_true", help="test configuration and exit")
 parser.add_argument('-T', action='store_true', help="test configuration file, dump it and exit")
 parser.add_argument('-v', '--version', action='version', help='Print version and exit')
@@ -64,7 +65,16 @@ alert = parsed_values["alert"]
 web_log = parsed_values["web_server"]["logs"]
 web_data = parsed_values["web_server"]["data"]
 
+# Load email address from '-e' option
+if args.email:
+    # Check if email is valid
+    import re
+    pattern = r"((?#Prevent prefix from begining with any special characters)^[A-Za-z0-9]+[-\.\w]+(?#Negative look behind)(?<![-\._]))@([-\w]+).([A-Z|a-z]{2,}[.]?)+"
+    if re.fullmatch(pattern, args.email):
+        email_address = args.email
+    else:
+        print("Email address not valid. \nOmitting...")
+
 # Convert parsed values to a dictionary
 values = {"log_files": log_files, "log_format": log_format, "delete_logs": delete_logs, "expire_logs": expire_logs,
         "notify": notify, "email": email_address, "alert": alert, "web_log": web_log, "web_data": web_data}
-
