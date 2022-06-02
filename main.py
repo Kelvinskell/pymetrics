@@ -67,13 +67,15 @@ web_data = parsed_values["web_server"]["data"]
 
 # Load email address from '-e' option
 if args.email:
-    # Check if email is valid
+        email_address = args.email
+# Check if email is valid
+if email_address:
     import re
     pattern = r"((?#Prevent prefix from begining with any special characters)^[A-Za-z0-9]+[-\.\w]+(?#Negative look behind)(?<![-\._]))@([-\w]+).([A-Z|a-z]{2,}[.]?)+"
-    if re.fullmatch(pattern, args.email):
-        email_address = args.email
-    else:
+    if not re.fullmatch(pattern, email_address):
+        email_address = None
         print("Email address not valid. \nOmitting...")
+
 # Convert parsed values to a dictionary
 values = {"log_files": log_files, "log_format": log_format, "delete_logs": delete_logs, "expire_logs": expire_logs,
         "notify": notify, "email": email_address, "alert": alert, "web_log": web_log, "web_data": web_data}
