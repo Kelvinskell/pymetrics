@@ -21,6 +21,6 @@ class WriteToAccessLog():
         if not os.path.isdir("logs"):
             os.mkdir("logs")
         with open("logs/access.log", "a") as file:
-            file.write(f"{self.date} {self.time} {self.system_type} {self.nodename} {self.user}\n")
+            file.write(f"pymetrics: {self.date} {self.time} {self.system_type} {self.nodename} {self.user}\n")
         return
 
