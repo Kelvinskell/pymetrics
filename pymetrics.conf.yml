@@ -44,6 +44,10 @@ notify:
 email_address:
   # Your email address
 
+url:
+        # To be used in testing for network connectivity
+        https://google.com
+
 web_server:
   logs:
     - /var/log/nginx
