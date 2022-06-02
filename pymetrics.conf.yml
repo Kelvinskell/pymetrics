@@ -47,6 +47,9 @@ email_address:
 url:
         # To be used in testing for network connectivity
         https://google.com
+timeout:
+        # Connection timeout
+        10
 
 web_server:
   logs:
