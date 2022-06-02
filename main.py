@@ -75,6 +75,7 @@ except TypeError:
 # Load email address from '-e' option
 if args.email:
         email_address = args.email
+
 # Check if email is valid
 if email_address:
     import re
