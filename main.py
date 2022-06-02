@@ -74,12 +74,13 @@ except TypeError:
 
 # Load email address from '-e' option
 if args.email:
-    # Check if email is valid
+        email_address = args.email
+# Check if email is valid
+if email_address:
     import re
     pattern = r"((?#Prevent prefix from begining with any special characters)^[A-Za-z0-9]+[-\.\w]+(?#Negative look behind)(?<![-\._]))@([-\w]+).([A-Z|a-z]{2,}[.]?)+"
-    if re.fullmatch(pattern, args.email):
-        email_address = args.email
-    else:
+    if not re.fullmatch(pattern, email_address):
+        email_address = None
         print("pymetrics: Info: Email address not valid. \nOmitting...")
 
 # Convert parsed values to a dictionary
