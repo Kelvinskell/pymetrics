@@ -55,15 +55,22 @@ if args.test or args.T:
         sys.exit(1)
 
 # Load parsed values
-log_files = parsed_values["log_files"]
-log_format = parsed_values["log_report_format"]
-delete_logs = parsed_values["delete_logs"]
-expire_logs = parsed_values["expire_logs"]
-notify = parsed_values["notify"]
-email_address = parsed_values["email_address"]
-alert = parsed_values["alert"]
-web_log = parsed_values["web_server"]["logs"]
-web_data = parsed_values["web_server"]["data"]
+try:
+    log_files = parsed_values["log_files"]
+    log_format = parsed_values["log_report_format"]
+    delete_logs = parsed_values["delete_logs"]
+    expire_logs = parsed_values["expire_logs"]
+    notify = parsed_values["notify"]
+    email_address = parsed_values["email_address"]
+    alert = parsed_values["alert"]
+    web_log = parsed_values["web_server"]["logs"]
+    web_data = parsed_values["web_server"]["data"]
+except KeyError as key:
+    print(f"pymetrics: Error: Key {key} is missing in {config_file} \nExitting...")
+    sys.exit(1)
+except TypeError:
+    print(f"pymetrics: Error: Missing value(s) in {config_file} \nExiting...")
+    sys.exit(1)
 
 # Load email address from '-e' option
 if args.email:
@@ -73,8 +80,16 @@ if args.email:
     if re.fullmatch(pattern, args.email):
         email_address = args.email
     else:
-        print("Email address not valid. \nOmitting...")
+        print("pymetrics: Info: Email address not valid. \nOmitting...")
+
 # Convert parsed values to a dictionary
 values = {"log_files": log_files, "log_format": log_format, "delete_logs": delete_logs, "expire_logs": expire_logs,
         "notify": notify, "email": email_address, "alert": alert, "web_log": web_log, "web_data": web_data}
 
+# Check for unknown keys
+for key in parsed_values.keys():
+    if key not in values.keys():
+        if key in ["email_address", "log_report_format", "web_server"]:
+            pass
+        else:
+            print("pymetrics: Info: Unrecognised key: {} in {}".format(key, config_file))
