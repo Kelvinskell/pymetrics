@@ -6,6 +6,7 @@ import psutil
 import socket
 import platform
 import distro
+import interfaces
 from datetime import datetime
 from datetime import date
 
@@ -21,3 +22,4 @@ class SysFetch():
         self.date = date.today()
         self.time = datetime.now().strftime(%H:%M:%S)
         self.values = values
+        self.interfaces = netifaces.interfaces()
