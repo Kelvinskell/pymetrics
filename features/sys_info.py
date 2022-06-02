@@ -27,6 +27,12 @@ class SysFetch():
         self.values = values
         self.interfaces = netifaces.interfaces()
 
+    def generalInfo(self):
+        info = {"boot": self.boot_time, "cpu_cores": self.cpu_cores, "distribution": self.distro, 
+                "nodename": None, "os_type": self.os_type, "version": self.version} 
+        return info
+
+
     def check_connectivity(self):
         # Test network conectivity
         self.url = self.values["url"]
@@ -53,4 +59,3 @@ class SysFetch():
                     interface_names.append(interface)
                     ip_addresses.append(ip_addr)
         return interface_names, ip_addresses
-
