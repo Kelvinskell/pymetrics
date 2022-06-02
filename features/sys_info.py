@@ -20,3 +20,4 @@ class SysFetch():
         self.version = platform.release()
         self.date = date.today()
         self.time = datetime.now().strftime(%H:%M:%S)
+        self.values = values
