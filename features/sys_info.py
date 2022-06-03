@@ -18,6 +18,28 @@ try:
 except ModuleNotFoundError as error:
     print(f"pymetrics: Error: {error}. \nUse 'pip install' to install module.")
 
+# Plain text log formatting 
+# fp means file pointer
+def plainLog(fp, values):
+            with open(fp, "w") as txt_file:
+                for key, value in values:
+                    txt_file.write("{} -----------> {}\n".format(key, value))
+
+# Csv log formatting
+def csvLog(fp, value_items, value_keys,  ):
+            log = [value_items]
+            keys = [key for key in value_keys]
+            with open(fp, "w") as csv_file:
+                writer = csv.DictWriter(csv_file, fieldnames=keys)
+                writer.writeheader()
+                writer.writerows(value_items)
+
+# json log formatting
+def jsonLog(fp, values):
+    with open(fp, "w") as json_file:
+        json.dump(values, json_file,  indent=6, separators=(' , ', ' : '), sort_keys=True)
+
+
 class SysFetch():
     # Initialise values
     def __init__(self, values):
@@ -98,22 +120,15 @@ class LogSysFetch(SysFetch):
 
         # Log in plain text
         if log_format == "plain_text":
-            with open(f"logs/system_info/report-{self.date}.txt", "w") as txt_file:
-                for key, value in self.info.items():
-                    txt_file.write("{} -----------> {}\n".format(key, value))
+            plainLog(fp=f"logs/system_info/report-{self.date}.txt", values=self.info.items())
 
         # Log in csv format
         if log_format == "csv":
-            log = [dict(self.info.items())]
-            keys = [key for key in self.info.keys()]
-            with open(f"logs/system_info/report-{self.date}.csv", "w") as csv_file:
-                writer = csv.DictWriter(csv_file, fieldnames=keys)
-                writer.writeheader()
-                writer.writerows(log)
+            csvLog(fp=f"logs/system_info/report-{self.date}.csv", value_items=[dict(self.info.items())], value_keys=self.info.keys())
+
         # Log in json format
         if log_format == "json":
-            with open(f"logs/system_info/report-{self.date}.json", "w") as json_file:
-                json.dump(dict(self.info.items()), json_file,  indent=6, separators=(' , ', ' : '), sort_keys=True)
+            jsonLog(fp=f"logs/system_info/report-{self.date}.json",values=dict(self.info.items()))
 
 
 
