@@ -9,10 +9,6 @@ except ModuleNotFoundError as error:
     print(f"pymetrics: Error: {error}. \nUse 'pip install' to install module"
 from features import config_parse
 
-# Log usage to logs/access.log
-from features import access
-access.WriteToAccessLog().log()
-
 # Create the parser
 parser = argparse.ArgumentParser(prog="pymetrics", description="Collect, analyse and report useful system meyrics", allow_abbrev=False, epilog="Enjoy the program!")
 
@@ -100,3 +96,17 @@ for key in parsed_values.keys():
             pass
         else:
             print("pymetrics: Info: Illegal key: {} in {}".format(key, config_file))
+
+# Log usage to logs/access.log
+from features import access
+access.WriteToAccessLog().log()
+
+# Collect system information
+from features import sys_info
+
+# Instantiate class
+info = sys_info.SysFetch(values)
+# Collect metrics
+info.generalInfo()
+info.check_connectivity()
+info.check_interfaces()
