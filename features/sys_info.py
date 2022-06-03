@@ -1,35 +1,51 @@
 #!/usr/bin/env python3
 
 # Import modules
-import distro
-import netifaces
-import os
-import psutil
-import platform
-import re
-import requests
-import socket
-from datetime import datetime
-from datetime import date
+try:
+    import distro
+    import netifaces
+    import os
+    #import psutil
+    import platform
+    import re
+    import requests
+    import socket
+    import sys
+    from datetime import datetime
+    from datetime import date
+except ModuleNotFoundError as error:
+    print(f"pymetrics: Error: {error}. \nUse 'pip install' to install module.")
 
 class SysFetch():
     # Initialise values
     def __init__(self, values):
-        self.boot_time = datetime.fromtimestamp(psutil.boot_time()).strftime("%Y-%m-%d %H:%M:%S")
-        self.cpu_cores = psutil.cpu_count()
-        self.distro = distro.id()
-        self.nodename = socket.gethostname()
-        self.os_type = platform.system()
-        self.user = os.getlogin()
-        self.version = platform.release()
-        self.date = date.today()
-        self.time = datetime.now().strftime("%H:%M:%S")
-        self.values = values
-        self.interfaces = netifaces.interfaces()
+        try:
+            self.architecture = platform.machine()
+            #self.boot_time = datetime.fromtimestamp(psutil.boot_time()).strftime("%Y-%m-%d %H:%M:%S")
+            #self.cpu_cores = psutil.cpu_count()
+            self.distro = distro.id()
+            self.nodename = socket.gethostname()
+            self.os_type = platform.system()
+            self.user = os.getlogin()
+            self.version = platform.release()
+            self.date = date.today()
+            self.time = datetime.now().strftime("%H:%M:%S")
+            self.values = values
+            self.interfaces = netifaces.interfaces()
+        except PermissionError as error:
+            print("pymetrics: Error: Not enough permissions.")
 
     def generalInfo(self):
-        info = {"boot": self.boot_time, "cpu_cores": self.cpu_cores, "distribution": self.distro, 
-                "nodename": None, "os_type": self.os_type, "version": self.version} 
+        info = {}
+        info["architecture"] = self.architecture
+        info["boot"] = "self.boot_time"
+        info["cpu_cores"] = "self.cpu_cores"
+        info["distribution"] = self.distro 
+        info["nodename"] = self.nodename
+        info["os_type"] = self.os_type
+        info["version"] = self.version
+        if not all(info.values()):
+            print("pymetrics: Info: Unable to collect some metrics.")
         return info
 
 
@@ -59,3 +75,5 @@ class SysFetch():
                     interface_names.append(interface)
                     ip_addresses.append(ip_addr)
         return interface_names, ip_addresses
+
+
