@@ -16,8 +16,9 @@ parser = argparse.ArgumentParser(prog="pymetrics", description="Collect, analyse
 parser.version = 'pymetrics: version 1.0'
 
 # Add the arguments
-parser.add_argument('-c', metavar='Config_file', action="store", type=str, help="specify alternative yaml configiration file")
-parser.add_argument('-e', '--email', metavar='email_address', action='store', type=str, help='Specify an email address to send report.') 
+parser.add_argument('-c', metavar='Config file', action="store", type=str, help="specify alternative yaml configiration file")
+parser.add_argument('-e', '--email', metavar='Email address', action='store', type=str, help='Specify an email address to send report.') 
+parser.add_argument('-f', '--format', metavar='Log format', action='store', type=str, help='Specify format for log reporting')
 parser.add_argument('-t', '--test', action="store_true", help="test configuration and exit")
 parser.add_argument('-T', action='store_true', help="test configuration file, dump it and exit")
 parser.add_argument('-v', '--version', action='version', help='Print version and exit')
@@ -84,6 +85,13 @@ if email_address:
     if not re.fullmatch(pattern, email_address):
         email_address = None
         print("pymetrics: Info: Email address not valid. \nOmitting...")
+
+# Specify log format
+if args.format:
+    if args.format not in ["plain_text", "csv", "json"]:
+        print(f"pymetrics: Error: Invalid format {args.format}. \nUsing default format.")
+    else:
+        log_format = args.format
 
 # Convert parsed values to a dictionary
 values = {"log_files": log_files, "log_format": log_format, "delete_logs": delete_logs, "expire_logs": expire_logs,
