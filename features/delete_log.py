@@ -50,9 +50,9 @@ class DeleteLog():
             formatted_date = current_date - timedelta(date)
             date_range.append(formatted_date)
         
-        # Format file_dates 
+        # Format file_dates using a generator expression 
         if self.file_dates:
-            extracted_dates = [datetime.strptime(date, date_format) for date in self.file_dates]
+            extracted_dates = (datetime.strptime(date, date_format) for date in self.file_dates)
             self.date_range = date_range
             self.extracted_dates = extracted_dates
             return self.date_range, self.extracted_dates
@@ -67,9 +67,6 @@ class DeleteLog():
         nested_list = []
         for walk in os.walk("logs"):
             for parentdir, subdir, namelists in os.walk("logs"):
-                print(subdir)
-                #os.chdir(parentdir)
-                print(os.getcwd())
                 nested_list.append(namelists)
 
                 # Extract each filename from list of filenames
@@ -79,8 +76,8 @@ class DeleteLog():
                 for date in old_dates:
                     for filename in flattened_list:
                         if re.search(date, filename):
-                            print(filename)
-                            print(os.getcwd(), os.path.exists(filename))
-                            #os.remove(filename)
+                            pathname = os.path.join(parentdir, filename)
+                            if os.path.exists(pathname):
+                                os.remove(os.path.join(parentdir, filename))
 
 
