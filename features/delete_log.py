@@ -12,6 +12,7 @@ class DeleteLog():
 
         # Make filedate avilable to other functions within this class
         self.extractDate()
+        self.formatDate()
 
     def extractDate(self):
         nested_list = []
@@ -28,7 +29,6 @@ class DeleteLog():
                 if regex:
                     file_dates.append(regex.group(2))
             self.file_dates = file_dates
-            #print(self.filedates)
             return self.file_dates
 
     def formatDate(self):
@@ -42,15 +42,45 @@ class DeleteLog():
         current_date = str(datetime.today().strftime("%Y-%m-%d"))
         current_date = datetime.strptime(current_date, date_format)
 
+        # Add one to value of current date, to prevent false values
+        current_date = current_date + timedelta(1)
+
         # Get dates between today's date and 'expire_after'
-        for date in range(1, expire_after + 1):
+        for date in range(expire_after):
             formatted_date = current_date - timedelta(date)
             date_range.append(formatted_date)
         
-        # Format file_dates
-        extracted_dates = [datetime.strptime(date, date_format) for date in self.file_dates]
+        # Format file_dates 
+        if self.file_dates:
+            extracted_dates = [datetime.strptime(date, date_format) for date in self.file_dates]
+            self.date_range = date_range
+            self.extracted_dates = extracted_dates
+            return self.date_range, self.extracted_dates
 
-        return date_range, extracted_dates
+    def deleteOldLogs(self):
+        old_dates = []
+        for date in self.extracted_dates:
+            if date not in self.date_range:
+                old_dates.append(str(date).split()[0])
 
-        
+        # Recurse through the directory and extract filenames
+        nested_list = []
+        for walk in os.walk("logs"):
+            for parentdir, subdir, namelists in os.walk("logs"):
+                print(subdir)
+                #os.chdir(parentdir)
+                print(os.getcwd())
+                nested_list.append(namelists)
+
+                # Extract each filename from list of filenames
+                flattened_list = [file for sublist in nested_list for file in sublist]
+
+                # Search for files containing old dates
+                for date in old_dates:
+                    for filename in flattened_list:
+                        if re.search(date, filename):
+                            print(filename)
+                            print(os.getcwd(), os.path.exists(filename))
+                            #os.remove(filename)
+
 
