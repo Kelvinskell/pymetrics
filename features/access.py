@@ -8,7 +8,7 @@ try:
     from datetime import datetime
     from datetime import date
 except ModuleNotFoundError as error:
-    print(f"pymetrics: Error: {error}. \nUse 'pip install' to install module"
+    print(f"pymetrics: Error: {error}. \nUse 'pip install' to install module")
 
 # Log a report whenever main.py is executed
 class WriteToAccessLog():

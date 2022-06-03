@@ -6,7 +6,7 @@ try:
     import os
     import sys
 except ModuleNotFoundError as error:
-    print(f"pymetrics: Error: {error}. \nUse 'pip install' to install module"
+    print(f"pymetrics: Error: {error}. \nUse 'pip install' to install module")
 from features import config_parse
 
 # Create the parser
