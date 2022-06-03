@@ -46,7 +46,8 @@ class SysFetch():
         info["version"] = self.version
         if not all(info.values()):
             print("pymetrics: Info: Unable to collect some metrics.")
-        return info
+        self.info = info
+        return self.info
 
 
     def check_connectivity(self):
@@ -76,4 +77,17 @@ class SysFetch():
                     ip_addresses.append(ip_addr)
         return interface_names, ip_addresses
 
+# Log collected system metrics
+class LogSysFetch(SysFetch):
+    def __init__(self, values):
+        SysFetch.__init__(self, values)
+
+    def logGeneral(self):
+        report = SysFetch.generalInfo(self)
+        if not os.path.isdir("logs"):
+            try:
+                os.mkdir("logs")
+            except PermissionError as error:
+                print(f"pymetrics: Error: {error}")
+        print(report)
 

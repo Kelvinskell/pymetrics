@@ -100,10 +100,8 @@ access.WriteToAccessLog().log()
 
 # Collect system information
 from features import sys_info
-
-# Instantiate class
 info = sys_info.SysFetch(values)
-# Collect metrics
-info.generalInfo()
-info.check_connectivity()
-info.check_interfaces()
+log = sys_info.LogSysFetch(values)
+
+# Log metrics
+log.logGeneral()
