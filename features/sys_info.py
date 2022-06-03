@@ -2,7 +2,9 @@
 
 # Import modules
 try:
+    import csv
     import distro
+    import json
     import netifaces
     import os
     #import psutil
@@ -80,14 +82,24 @@ class SysFetch():
 # Log collected system metrics
 class LogSysFetch(SysFetch):
     def __init__(self, values):
+        self.values = values
         SysFetch.__init__(self, values)
 
     def logGeneral(self):
         report = SysFetch.generalInfo(self)
-        if not os.path.isdir("logs"):
+        if not os.path.isdir("logs/system_info"):
             try:
-                os.mkdir("logs")
-            except PermissionError as error:
-                print(f"pymetrics: Error: {error}")
-        print(report)
+                os.makedirs("logs/system_info")
+            except PermissionError:
+                print("pymetrics: Error: Unable to log reports. \nNot enough permissions.")
+
+        # Read config file
+        log_format = self.values["log_format"]
+
+        # Log in plain text
+        if log_format == "plain_text":
+            with open(f"logs/system_info/report-{self.date}.txt", "w") as file:
+                for key, value in self.info.items():
+                    file.write("{} -----------> {}\n".format(key, value))
+        
 
