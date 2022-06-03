@@ -4,6 +4,7 @@ import re
 import os
 from datetime import timedelta
 from datetime import datetime
+from datetime import date
 
 class DeleteLog():
     def __init__(self, values):
@@ -31,13 +32,25 @@ class DeleteLog():
             return self.file_dates
 
     def formatDate(self):
+        date_format = "%Y-%m-%d"
+        date_range = []
+
         # Read config value
         expire_after = self.values["expire_logs"]
 
-        # Format dates
-        date_range = []
-        date_format = "%Y-%m-%d"
-        formatted_dates = [datetime.strptime(date, date_format) for date in self.file_dates]
+        # Get today's date
+        current_date = str(datetime.today().strftime("%Y-%m-%d"))
+        current_date = datetime.strptime(current_date, date_format)
 
-        for num in range(1, expire_after + 1):
-            date_range.append(timedelta(num))
+        # Get dates between today's date and 'expire_after'
+        for date in range(1, expire_after + 1):
+            formatted_date = current_date - timedelta(date)
+            date_range.append(formatted_date)
+        
+        # Format file_dates
+        extracted_dates = [datetime.strptime(date, date_format) for date in self.file_dates]
+
+        return date_range, extracted_dates
+
+        
+
