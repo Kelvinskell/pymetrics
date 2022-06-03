@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
 
 # Import modules
-import os
-import socket
-import platform
-from datetime import datetime
-from datetime import date
+try:
+    import os
+    import socket
+    import platform
+    from datetime import datetime
+    from datetime import date
+except ModuleNotFoundError as error:
+    print(f"pymetrics: Error: {error}. \nUse 'pip install' to install module"
 
 # Log a report whenever main.py is executed
 class WriteToAccessLog():

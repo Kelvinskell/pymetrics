@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
 
 # Import modules
-import argparse
-import os
-import sys
+try:
+    import argparse
+    import os
+    import sys
+except ModuleNotFoundError as error:
+    print(f"pymetrics: Error: {error}. \nUse 'pip install' to install module"
 from features import config_parse
 
 # Log usage to logs/access.log
