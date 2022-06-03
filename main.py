@@ -114,5 +114,11 @@ from features import sys_info
 info = sys_info.SysFetch(values)
 log = sys_info.LogSysFetch(values)
 
-# Log metrics
+# Send collected metrics to logs
 log.logGeneral()
+
+
+# Garbage collection
+from features import delete_log
+gc = delete_log.DeleteLog(values)
+

@@ -8,7 +8,7 @@ class DeleteLog():
     def __init__(self, values):
         self.values = values
 
-    def formatDate(self):
+    def extractDate(self):
         nested_list = []
         file_dates = []
         pattern = r"([_a-zA-Z]+)-([\d-]+)(\.txt|\.csv|\.json)$"
