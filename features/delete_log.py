@@ -3,10 +3,14 @@
 import re
 import os
 from datetime import timedelta
+from datetime import datetime
 
 class DeleteLog():
     def __init__(self, values):
         self.values = values
+
+        # Make filedate avilable to other functions within this class
+        self.extractDate()
 
     def extractDate(self):
         nested_list = []
@@ -22,6 +26,18 @@ class DeleteLog():
                 regex = re.search(pattern, filename)
                 if regex:
                     file_dates.append(regex.group(2))
-            self.filedates = file_dates
-            return self.filedates
+            self.file_dates = file_dates
+            #print(self.filedates)
+            return self.file_dates
 
+    def formatDate(self):
+        # Read config value
+        expire_after = self.values["expire_logs"]
+
+        # Format dates
+        date_range = []
+        date_format = "%Y-%m-%d"
+        formatted_dates = [datetime.strptime(date, date_format) for date in self.file_dates]
+
+        for num in range(1, expire_after + 1):
+            date_range.append(timedelta(num))

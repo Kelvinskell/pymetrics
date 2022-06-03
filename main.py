@@ -121,4 +121,4 @@ log.logGeneral()
 # Garbage collection
 from features import delete_log
 gc = delete_log.DeleteLog(values)
-gc.deleteLogs()
+gc.formatDate()
