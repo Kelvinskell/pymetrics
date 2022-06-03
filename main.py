@@ -89,7 +89,7 @@ if email_address:
 # Specify log format
 if args.format:
     if args.format not in ["plain_text", "csv", "json"]:
-        print(f"pymetrics: Error: Invalid format {args.format}. \nUsing default format.")
+        print(f"pymetrics: Info: Illegal format {args.format}. \nUsing default format.")
     else:
         log_format = args.format
 

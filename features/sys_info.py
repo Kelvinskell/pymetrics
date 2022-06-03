@@ -110,5 +110,10 @@ class LogSysFetch(SysFetch):
                 writer = csv.DictWriter(csv_file, fieldnames=keys)
                 writer.writeheader()
                 writer.writerows(log)
+        # Log in json format
+        if log_format == "json":
+            with open(f"logs/system_info/report-{self.date}.json", "w") as json_file:
+                json.dump(dict(self.info.items()), json_file,  indent=6, separators=(' , ', ' : '), sort_keys=True)
+
 
 
