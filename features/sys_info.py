@@ -4,14 +4,16 @@
 try:
     import csv
     import distro
+    import humanize
     import json
     import netifaces
     import os
-    #import psutil
+    import psutil
     import platform
     import re
     import requests
     import socket
+    import shutil
     import sys
     from datetime import datetime
     from datetime import date
@@ -54,8 +56,8 @@ class SysFetch():
     def __init__(self, values):
         try:
             self.architecture = platform.machine()
-            #self.boot_time = datetime.fromtimestamp(psutil.boot_time()).strftime("%Y-%m-%d %H:%M:%S")
-            #self.cpu_cores = psutil.cpu_count()
+            self.boot_time = datetime.fromtimestamp(psutil.boot_time()).strftime("%Y-%m-%d %H:%M:%S")
+            self.cpu_cores = psutil.cpu_count()
             self.distro = distro.id()
             self.nodename = socket.gethostname()
             self.os_type = platform.system()
@@ -63,6 +65,9 @@ class SysFetch():
             self.version = platform.release()
             self.date = date.today()
             self.time = datetime.now().strftime("%H:%M:%S")
+            self.total_disk = shutil.disk_usage('/').total
+            self.free_disk = shutil.disk_usage('/').free
+            self.used_disk = shutil.disk_usage('/').used
             self.values = values
             self.interfaces = netifaces.interfaces()
         except PermissionError as error:
@@ -71,8 +76,8 @@ class SysFetch():
     def generalInfo(self):
         info = {}
         info["architecture"] = self.architecture
-        info["boot"] = "self.boot_time"
-        info["cpu_cores"] = "self.cpu_cores"
+        info["boot"] = self.boot_time
+        info["cpu_cores"] = self.cpu_cores
         info["distribution"] = self.distro 
         info["nodename"] = self.nodename
         info["os_type"] = self.os_type
@@ -114,6 +119,23 @@ class SysFetch():
         self.interface_names = interface_names
         self.ip_addresses = ip_addresses
         return self.interface_names, self.ip_addresses
+
+    def check_disk(self):
+        free_disk = humanize.naturalsize(self.free_disk)
+        total_disk = humanize.naturalsize(self.total_disk)
+        used_disk = humanize.naturalsize(self.used_disk)
+        percent_used = used_disk / total_disk * 100
+        percent_free = free_disk / total_disk * 100
+
+        disk_values = {"free": free_disk, 
+                "total": total_disk, 
+                "used": used_disk, 
+                "percentage free": "{}%".format(percent_free)
+                "percentage used": "{}%".format(percent_used)
+                }
+        self.disk_values = disk_values
+        return self.disk_values
+
 
 # Log collected system metrics
 class LogSysFetch(SysFetch):
