@@ -80,8 +80,8 @@ class SysFetch():
         self.timeout = self.values["timeout"]
         try:
             request = requests.get(self.url, timeout=self.timeout)
-            self.request = request
             if request.status_code == 200:
+                self.request = True
                 return self.request
         except (requests.ConnectionError, requests.Timeout):
             self.request = False
@@ -156,4 +156,15 @@ class LogSysFetch(SysFetch):
                         text_file.write("{}: Internet Connection ----------> Active\n".format(self.time))
                     else:
                         text_file.write("{}: Internet Connection ----------> Not Active\n".format(self.time))
+        # Log in json format
+        if log_format == "json":
+            log_file = f"logs/connection_info/report-{self.date}.json"
+            # Create a new file if file doesnt exist append if it exists
+            if os.path.isfile(log_file):
+                mode = "a"
+            else:
+                mode = "w"
 
+            connection_values = {"time": self.time, "internet": self.request}  
+            with open(log_file, mode) as json_file:
+                json.dump(connection_values, json_file, indent=6, separators=(' , ', ' : '))
