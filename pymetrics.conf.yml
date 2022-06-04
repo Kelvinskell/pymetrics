@@ -61,10 +61,5 @@ web_server:
     - /var/www/apache2
     - /var/www/httpd
 
-alert:
-  # Instantly alert when system values become critical
-  True
-  # False
-
 # Use the -t option for syntax cjeck
 # Use the -T option for syntax cjwck and printing out the configiration.
