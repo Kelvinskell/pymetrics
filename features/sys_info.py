@@ -124,13 +124,17 @@ class SysFetch():
         free_disk = humanize.naturalsize(self.free_disk)
         total_disk = humanize.naturalsize(self.total_disk)
         used_disk = humanize.naturalsize(self.used_disk)
-        percent_used = used_disk / total_disk * 100
-        percent_free = free_disk / total_disk * 100
+        percent_used = self.used_disk / self.total_disk * 100
+        percent_free = self.free_disk / self.total_disk * 100
+        
+        # Round off percent to 2 decimal places
+        percent_used = "{:.2f}".format(percent_used)
+        percent_free = "{:.2f}".format(percent_free)
 
         disk_values = {"free": free_disk, 
                 "total": total_disk, 
                 "used": used_disk, 
-                "percentage free": "{}%".format(percent_free)
+                "percentage free": "{}%".format(percent_free),
                 "percentage used": "{}%".format(percent_used)
                 }
         self.disk_values = disk_values
@@ -223,3 +227,21 @@ class LogSysFetch(SysFetch):
         if log_format == "json":
             log_file = os.path.join(dirpath, f"report-{self.date}.json")
             jsonLog(fp=log_file, values=dict(ip_dict.items()))
+
+
+    def logDisk(self):
+        report = SysFetch.check_disk(self)
+
+        # Read config file
+        log_format = self.values["log_format"]
+
+        dirpath = "logs/disk_info"
+        if not os.path.isdir(dirpath):
+            os.mkdir(dirpath)
+
+        values = self.disk_values
+
+        # Log plain text
+        if log_format == "plain_text":
+            log_file = os.path.join(dirpath, f"report-{self.date}.txt")
+            plainLog(fp=log_file, values=values.items())
