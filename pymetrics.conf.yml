@@ -33,8 +33,6 @@ delete_logs:
 expire_logs:
   # Delete logs older than _ days
   7
-  # 14
-  # 30
   # None
 
 notify:

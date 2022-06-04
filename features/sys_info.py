@@ -80,8 +80,13 @@ class SysFetch():
         self.timeout = self.values["timeout"]
         try:
             request = requests.get(self.url, timeout=self.timeout)
+<<<<<<< HEAD
             if request.status_code == 200:
                 self.request = True
+=======
+            self.request = request
+            if request.status_code == 200:
+>>>>>>> 49891ae (chore: Update files)
                 return self.request
         except (requests.ConnectionError, requests.Timeout):
             self.request = False
