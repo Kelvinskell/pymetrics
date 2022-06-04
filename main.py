@@ -105,8 +105,12 @@ for key in parsed_values.keys():
             print("pymetrics: Info: Illegal key: {} in {}".format(key, config_file))
 
 # Log usage to logs/access.log
-from features import access
-access.WriteToAccessLog().log()
+def logAccess():
+    from features import access
+    access.WriteToAccessLog().log()
+    return True
+
+logAccess()
 
 # Collect system information
 from features import sys_info
@@ -114,9 +118,13 @@ info = sys_info.SysFetch(values)
 log = sys_info.LogSysFetch(values)
 
 # Send collected metrics to logs
-log.logGeneral()
-log.logConnection()
-log.logInterface()
+def logMetrics():
+    log.logGeneral()
+    log.logConnection()
+    log.logInterface()
+    return True
+
+logMetrics()
 
 # Garbage collection
 from features import delete_log
