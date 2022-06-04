@@ -189,11 +189,10 @@ class LogSysFetch(SysFetch):
         # Log plain text
         if log_format == "plain_text":
             log_file = os.path.join(dirpath, f"report-{self.date}.txt")
-            if os.path.isfile(log_file):
-                mode = "a"
-            else:
-                mode = "w"
+            plainLog(fp=log_file, values=ip_dict.items())
 
-            plainLog(fp=log_file, values=ip_dict.items(), mode=mode)
+        # Log csv
+        if log_format == "csv":
+            log_file = os.path.join(dirpath, f"report{self.date}.csv")
 
-
+            csvLog(fp=log_file, value_items=[dict(ip_dict.items())], value_keys=ip_dict.keys())
