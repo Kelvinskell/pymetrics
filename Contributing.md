@@ -14,3 +14,13 @@ Please make sure to update the README.md file as appropriate.
 
 ## Guidelines
 
+- Please make your code as **pythonic** as possible. 
+- Your coding style should closely adhere to **PEP8** guidelines. 
+- Include comments directly above the modified or added lines of code
+- When writing comments, give a space between the hastag and your actual comments. e.g: # This is a comment
+- Comments ideally should not have a fullstop . at the end
+- Names for variables, functions and classes should be meaningfully related to its intended action
+- Finally, be sure to test your code before submitting changes
+
+
+You can also engage me directly on LinkedIn: `www.linkedin.com/in/kelvin-onuchukwu-3460871a1`
