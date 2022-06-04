@@ -32,6 +32,8 @@ delete_logs:
   # False
 expire_logs:
   # Delete logs older than _ days
+  # Default is 7 days
+  # Select None to prevent log deletion
   7
   # None
 
