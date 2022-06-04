@@ -9,7 +9,7 @@ sys.path.append('../features')
 import config_parse
 
 # Instantiate YamlParser class
-parse_class = config_parse.YamlParser('../default.conf.yml')
+parse_class = config_parse.YamlParser('../pymetrics.conf.yml')
 
 class TestYamlParser(unittest.TestCase):
     def test_basic(self):
