@@ -245,3 +245,10 @@ class LogSysFetch(SysFetch):
         if log_format == "plain_text":
             log_file = os.path.join(dirpath, f"report-{self.date}.txt")
             plainLog(fp=log_file, values=values.items())
+
+
+        # Log csv
+        if log_format == "csv":
+            log_file = os.path.join(dirpath, f"report-{self.date}.csv")
+
+            csvLog(fp=log_file, value_items=[dict(values.items())], value_keys=values.keys())
