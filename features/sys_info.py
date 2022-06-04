@@ -250,5 +250,12 @@ class LogSysFetch(SysFetch):
         # Log csv
         if log_format == "csv":
             log_file = os.path.join(dirpath, f"report-{self.date}.csv")
-
             csvLog(fp=log_file, value_items=[dict(values.items())], value_keys=values.keys())
+
+        # log json
+        if log_format == "json":
+            log_file = os.path.join(dirpath, f"report-{self.date}.json")
+            jsonLog(fp=log_file, values=dict(values.items()))
+
+
+
