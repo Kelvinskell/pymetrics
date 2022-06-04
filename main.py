@@ -116,7 +116,7 @@ log = sys_info.LogSysFetch(values)
 
 # Send collected metrics to logs
 log.logGeneral()
-
+log.logConnection()
 
 # Garbage collection
 from features import delete_log

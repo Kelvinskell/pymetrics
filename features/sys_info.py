@@ -80,9 +80,12 @@ class SysFetch():
         self.timeout = self.values["timeout"]
         try:
             request = requests.get(self.url, timeout=self.timeout)
-            return request.status_code == 200
+            self.request = request
+            if request.status_code == 200:
+                return self.request
         except (requests.ConnectionError, requests.Timeout):
-            return False
+            self.request = False
+            return self.request
 
     def check_interfaces(self):
         '''Test for active network interfaces and extract the IP addresses associated with them.
@@ -115,7 +118,7 @@ class LogSysFetch(SysFetch):
             except PermissionError:
                 print("pymetrics: Error: Unable to log reports. \nNot enough permissions.")
 
-        # Read config file
+        # Read config info
         log_format = self.values["log_format"]
 
         # Log in plain text
@@ -130,5 +133,27 @@ class LogSysFetch(SysFetch):
         if log_format == "json":
             jsonLog(fp=f"logs/system_info/report-{self.date}.json",values=dict(self.info.items()))
 
+    def logConnection(self): 
+        report = SysFetch.check_connectivity(self)
+        # Read config info
+        log_format = self.values["log_format"]
 
+        if not os.path.exists("logs/connection_info"):
+            os.mkdir("logs/connection_info")
+
+        # Log in plain text
+        if log_format == "plain_text":
+            log_file = f"logs/connection_info/report-{self.date}.txt"
+            
+            # Create a new file if file doesnt exist append if it exists
+            if os.path.isfile(log_file):
+                mode = "a"
+            else:
+                mode = "w"
+
+            with open(log_file, mode) as text_file:
+                    if self.request:
+                        text_file.write("{}: Internet Connection ----------> Active\n".format(self.time))
+                    else:
+                        text_file.write("{}: Internet Connection ----------> Not Active\n".format(self.time))
 
