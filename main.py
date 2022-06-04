@@ -62,7 +62,6 @@ try:
     expire_logs = parsed_values["expire_logs"]
     notify = parsed_values["notify"]
     email_address = parsed_values["email_address"]
-    alert = parsed_values["alert"]
     web_log = parsed_values["web_server"]["logs"]
     web_data = parsed_values["web_server"]["data"]
     timeout = parsed_values["timeout"]
@@ -95,7 +94,7 @@ if args.format:
 
 # Convert parsed values to a dictionary
 values = {"log_files": log_files, "log_format": log_format, "delete_logs": delete_logs, "expire_logs": expire_logs,
-        "notify": notify, "email": email_address, "alert": alert, "web_log": web_log, "web_data": web_data, "url": url, "timeout": timeout}
+        "notify": notify, "email": email_address, "web_log": web_log, "web_data": web_data, "url": url, "timeout": timeout}
 
 # Check for Illegal keys in config file
 for key in parsed_values.keys():
