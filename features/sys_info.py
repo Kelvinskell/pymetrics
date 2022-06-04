@@ -140,6 +140,9 @@ class SysFetch():
         self.disk_values = disk_values
         return self.disk_values
 
+    def check_login(self):
+        pass
+
 
 # Log collected system metrics
 class LogSysFetch(SysFetch):
