@@ -20,8 +20,8 @@ except ModuleNotFoundError as error:
 
 # Plain text log formatting 
 # fp means file pointer
-def plainLog(fp, values):
-            with open(fp, "w") as txt_file:
+def plainLog(fp, values, mode="w"):
+            with open(fp, mode) as txt_file:
                 for key, value in values:
                     txt_file.write("{} -----------> {}\n".format(key, value))
 
@@ -35,9 +35,18 @@ def csvLog(fp, value_items, value_keys,  ):
                 writer.writerows(value_items)
 
 # json log formatting
-def jsonLog(fp, values):
-    with open(fp, "w") as json_file:
-        json.dump(values, json_file,  indent=6, separators=(' , ', ' : '), sort_keys=True)
+def jsonLog(fp, values, mode="w"):
+
+            # Create a new file if file doesnt exist append if it exists
+            # Exclude system_info directory
+            if not re.search("logs/system_info", fp):
+                if os.path.isfile(fp):
+                    mode = "a"
+                else:
+                    mode = "w"
+
+            with open(fp, mode) as json_file:
+                json.dump(values, json_file,  indent=6, separators=(' , ', ' : '), sort_keys=True)
 
 
 class SysFetch():
@@ -102,7 +111,9 @@ class SysFetch():
                     ip_addr = string_regex.split()[-1].strip("']\"")
                     interface_names.append(interface)
                     ip_addresses.append(ip_addr)
-        return interface_names, ip_addresses
+        self.interface_names = interface_names
+        self.ip_addresses = ip_addresses
+        return self.interface_names, self.ip_addresses
 
 # Log collected system metrics
 class LogSysFetch(SysFetch):
@@ -159,12 +170,30 @@ class LogSysFetch(SysFetch):
         # Log in json format
         if log_format == "json":
             log_file = f"logs/connection_info/report-{self.date}.json"
-            # Create a new file if file doesnt exist append if it exists
+            connection_values = {"time": self.time, "internet": self.request}  
+            jsonLog(fp=log_file, values=connection_values)
+
+    def logInterface(self):
+        report = SysFetch.check_interfaces(self)
+
+        # Read config value
+        log_format = self.values["log_format"]
+
+        dirpath = "logs/interface_info"
+        if not os.path.isdir(dirpath):
+            os.mkdir(dirpath)
+
+        # Create a dictionary of interface names to IP addresses
+        ip_dict = dict(zip(self.interface_names, self.ip_addresses))
+        
+        # Log plain text
+        if log_format == "plain_text":
+            log_file = os.path.join(dirpath, f"report-{self.date}.txt")
             if os.path.isfile(log_file):
                 mode = "a"
             else:
                 mode = "w"
 
-            connection_values = {"time": self.time, "internet": self.request}  
-            with open(log_file, mode) as json_file:
-                json.dump(connection_values, json_file, indent=6, separators=(' , ', ' : '))
+            plainLog(fp=log_file, values=ip_dict.items(), mode=mode)
+
+
