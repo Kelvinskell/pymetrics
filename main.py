@@ -1,12 +1,21 @@
 #!/usr/bin/env python3
 
+# Import error
+from features import error
+
+# Import access
+from features import access
+
 # Import modules
 try:
     import argparse
     import os
     import sys
 except ModuleNotFoundError as error:
-    print(f"pymetrics: Error: {error}. \nUse 'pip install' to install module")
+    message = f"pymetrics: Error: {error}. \nUse 'pip install' to install module"
+    error.WriteToErrorLog(message).log()
+    print(message)
+    
 from features import config_parse
 
 # Create the parser
@@ -30,10 +39,14 @@ args = parser.parse_args()
 if args.c:
     c = args.c
     if not os.path.exists(c):
-        print("pymetrics: Error: No such file or directory.")
+        message = "pymetrics: Error: No such file or directory."
+        error.WriteToErrorLog(message).log()
+        print(message)
         sys.exit(1)
     if not os.path.isfile(c):
-        print(f"pymetrics: Error: {c} is not a file")
+        message = f"pymetrics: Error: {c} is not a file"
+        error.WriteToErrorLog(message).log()
+        print(message)
         sys.exit(1)
     config_file = c
 else:
@@ -67,10 +80,14 @@ try:
     timeout = parsed_values["timeout"]
     url = parsed_values["url"]
 except KeyError as key:
-    print(f"pymetrics: Error: Key {key} is missing in {config_file} \nExitting...")
+    message = f"pymetrics: Error: Key {key} is missing in {config_file} \nExitting..."
+    error.WriteToErrorLog(message).log()
+    print(message)
     sys.exit(1)
 except TypeError:
-    print(f"pymetrics: Error: Missing value(s) in {config_file} \nExiting...")
+    message = "pymetrics: Error: Missing value(s) in {config_file} \nExiting..."
+    error.WriteToErrorLog(message).log()
+    print(message)
     sys.exit(1)
 
 # Load email address from '-e' option
@@ -83,12 +100,16 @@ if email_address:
     pattern = r"((?#Prevent prefix from begining with any special characters)^[A-Za-z0-9]+[-\.\w]+(?#Negative look behind)(?<![-\._]))@([-\w]+).([A-Z|a-z]{2,}[.]?)+"
     if not re.fullmatch(pattern, email_address):
         email_address = None
-        print("pymetrics: Info: Email address not valid. \nOmitting...")
+        message = "pymetrics: Info: Email address not valid. \nOmitting..."
+        error.WriteToErrorLog(message).log()
+        print(message)
 
 # Specify log format
 if args.format:
     if args.format not in ["plain_text", "csv", "json"]:
-        print(f"pymetrics: Info: Illegal format {args.format}. \nUsing default format.")
+        message = f"pymetrics: Info: Illegal format {args.format}. \nUsing default format."
+        error.WriteToErrorLog(message).log()
+        print(message)
     else:
         log_format = args.format
 
@@ -102,11 +123,12 @@ for key in parsed_values.keys():
         if key in ["email_address", "log_report_format", "web_server"]:
             pass
         else:
-            print("pymetrics: Info: Illegal key: {} in {}".format(key, config_file))
+            message = "pymetrics: Info: Illegal key: {} in {}".format(key, config_file)
+            error.WriteToErrorLog(message).log()
+            print(message)
 
 # Log usage to logs/access.log
 def logAccess():
-    from features import access
     access.WriteToAccessLog().log()
     return True
 
