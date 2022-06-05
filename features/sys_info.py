@@ -49,8 +49,8 @@ def csvLog(fp, value_items, value_keys):
 def jsonLog(fp, values, mode="w"):
 
             # Create a new file if file doesnt exist append if it exists
-            # For connection_info directory
-            if re.search("logs/connection_info", fp):
+            # For connection_info and login_info directory
+            if re.search(r"logs/(connection_info|login_info)", fp):
                 if os.path.isfile(fp):
                     mode = "a"
                 else:
@@ -305,10 +305,16 @@ class LogSysFetch(SysFetch):
 
         values = self.login_values
 
-         Log plain text
+        #Log plain text
         if log_format == "plain_text":
-            log_file = os.path.join(dirpath, f"report.{self.date}.txt")
-            plainLog(fp=log_file, values=values)
+            log_file = os.path.join(dirpath, f"report-{self.date}.txt")
+            plainLog(fp=log_file, values=values.items())
+
+        # Log json
+        if log_format =="json":
+            log_file = os.path.join(dirpath, f"report-{self.date}.json")
+            jsonLog(fp=log_file, values=dict(values.items()))
+
 
 
 
