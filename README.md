@@ -20,7 +20,6 @@ ___This is an ongoing project. Features and capabilities are being added on a co
 
 You are welcome to view the `Contributing.md` file if you wish to contribute to this project.
 
-You can also reach me directly on [LinkedIn](www.linkedin.com/in/kelvin-onuchukwu-3460871a1) 
 
 ## Features
 
@@ -58,3 +57,12 @@ You can also reach me directly on [LinkedIn](www.linkedin.com/in/kelvin-onuchukw
    - **An email address can also be provided on the fly (at runtime) by using the `-e` or `--email` option**
 
 ## Installation And Usage 
+
+**To be able to use this program;**
+ - clone this repository to your local system (`git clone https://github.com/Kelvinskell/pymetrics.git` or git clone `git@github.com:Kelvinskell/pymetrics.git`). 
+ - Switch (cd) into the cloned repository (*pymetrics*) and execute the **main.py** file by running either `python3 main.py` or `./main.py` on your terminal.
+ - You can further create an alias to simplify things. 
+
+It is my hope that this program will serve your purposes.
+
+Connect with me on [LinkedIn](www.linkedin.com/in/kelvin-onuchukwu-3460871a1) 
