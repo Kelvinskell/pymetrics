@@ -145,7 +145,7 @@ def logMetrics():
     log.logConnection()
     log.logInterface()
     log.logMem()
-    info.check_login()
+    log.logLogin()
     return True
 
 logMetrics()

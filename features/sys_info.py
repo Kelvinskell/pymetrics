@@ -24,12 +24,20 @@ except ModuleNotFoundError as error:
 # Plain text log formatting 
 # fp means file pointer
 def plainLog(fp, values, mode="w"):
+            # Create a new file if file doesnt exist append if it exists
+            # For login_info directory
+            if re.search("logs/login_info", fp):
+                if os.path.isfile(fp):
+                    mode = "a"
+                else:
+                    mode = "w"
+
             with open(fp, mode) as txt_file:
                 for key, value in values:
                     txt_file.write("{} -----------> {}\n".format(key, value))
 
 # Csv log formatting
-def csvLog(fp, value_items, value_keys,  ):
+def csvLog(fp, value_items, value_keys):
             log = [value_items]
             keys = [key for key in value_keys]
             with open(fp, "w") as csv_file:
@@ -157,15 +165,16 @@ class SysFetch():
         return self.disk_values
 
     def check_login(self):
-        # Run only on linux machines
+        # Run only on linux systems
         if platform.system() == 'Linux':
             users = subprocess.check_output('who').decode('utf-8')
             usernames = [x.split()[0] for x in users.splitlines()]
             logins = [x.split()[3] for x in users.splitlines()]
             self.usernames = usernames
             self.logins = logins
-            values = dict(zip(self.usernames, self.logins))
-            print(values)
+            login_values = dict(zip(self.usernames, self.logins))
+            self.login_values = login_values
+            return self.login_values
 
 
 # Log collected system metrics
@@ -209,7 +218,7 @@ class LogSysFetch(SysFetch):
         if log_format == "plain_text":
             log_file = f"logs/connection_info/report-{self.date}.txt"
             
-            # Create a new file if file doesnt exist append if it exists
+             #Create a new file if file doesnt exist append if it exists
             if os.path.isfile(log_file):
                 mode = "a"
             else:
@@ -283,6 +292,23 @@ class LogSysFetch(SysFetch):
         if log_format == "json":
             log_file = os.path.join(dirpath, f"report-{self.date}.json")
             jsonLog(fp=log_file, values=dict(values.items()))
+
+    def logLogin(self):
+        report = SysFetch.check_login(self)
+
+            # Read config file
+        log_format = self.values["log_format"]
+
+        dirpath = "logs/login_info"
+        if not os.path.isdir(dirpath):
+            os.mkdir(dirpath)
+
+        values = self.login_values
+
+         Log plain text
+        if log_format == "plain_text":
+            log_file = os.path.join(dirpath, f"report.{self.date}.txt")
+            plainLog(fp=log_file, values=values)
 
 
 
