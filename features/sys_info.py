@@ -157,7 +157,15 @@ class SysFetch():
         return self.disk_values
 
     def check_login(self):
-        pass
+        # Run only on linux machines
+        if platform.system() == 'Linux':
+            users = subprocess.check_output('who').decode('utf-8')
+            usernames = [x.split()[0] for x in users.splitlines()]
+            logins = [x.split()[3] for x in users.splitlines()]
+            self.usernames = usernames
+            self.logins = logins
+            values = dict(zip(self.usernames, self.logins))
+            print(values)
 
 
 # Log collected system metrics
