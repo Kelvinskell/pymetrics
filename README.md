@@ -59,8 +59,8 @@ You are welcome to view the `Contributing.md` file if you wish to contribute to 
 ## Installation And Usage 
 
 **To be able to use this program;**
- - clone this repository to your local system (`git clone https://github.com/Kelvinskell/pymetrics.git` or git clone `git@github.com:Kelvinskell/pymetrics.git`). 
- - Switch (cd) into the cloned repository (*pymetrics*) and execute the **main.py** file by running either `python3 main.py` or `./main.py` on your terminal.
+ - clone this repository to your local system (`git clone https://github.com/Kelvinskell/pymetrics.git` or `git clone git@github.com:Kelvinskell/pymetrics.git`). 
+ - Switch (`cd`) into the cloned repository (*pymetrics*) and execute the **main.py** file by running either `python3 main.py` or `./main.py` on your terminal.
  - You can further create an alias to simplify things. 
 
 It is my hope that this program will serve your purposes.
