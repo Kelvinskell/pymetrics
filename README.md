@@ -19,4 +19,24 @@ This issue can be mitigated though with a little tweaking of the configuration f
 ___This is an ongoing project. Features and capabilities are being added on a continuous basis.___
 
 You are welcome to view the `Contributing.md` file if you wish to contribute to this project.
-You Can also reach me directly on [LinkedIn](www.linkedin.com/in/kelvin-onuchukwu-3460871a1) 
+
+You can also reach me directly on [LinkedIn](www.linkedin.com/in/kelvin-onuchukwu-3460871a1) 
+
+## Features
+
+1. ##### Configuration
+ - pymetrics reads from its default configuration file, **pymetrics.conf.yml**. This configuration file is consumed by the script at execution and it defines the behaviour of the script. 
+ - A different configuration file can also be passed to the script by using the `-c` option. 
+ - Any configuration file passed to the script must be written in YAML and must closely mirror the default configuration file. 
+   - Keys or values not provided in the configuration file are marked as illegal keys/values and the script will refuse to parse them. 
+   - This can cause the program execution to fail. 
+   - **You can test your configuration file by running the script with the `-t` or `-T` option.**
+
+2. ##### System Information 
+ - pymetrics collects other system information like the OS name, OS type, nodename, active interfaces, current IP addresses, number of logged in users and their time of login, disk usage information, virtual memory information, cpu statistics, network connectivity information, and so many more. 
+
+3. ##### Log file analysis 
+ - pymetrics searches specified log files and extracts useful information for logging. 
+   - By default, pymetrics only analyses a handful of log files. But other log files can be included in the configuration file. 
+   - Only the files present in the configuration file can be parsed by the script. 
+ - pymetrics also specially analyses Web server logs, if present, and collects useful metrics from them. 
