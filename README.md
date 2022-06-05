@@ -62,8 +62,9 @@ You are welcome to view the `Contributing.md` file if you wish to contribute to 
  - clone this repository to your local system (`git clone https://github.com/Kelvinskell/pymetrics.git` or `git clone git@github.com:Kelvinskell/pymetrics.git`). 
  - Switch (`cd`) into the cloned repository (*pymetrics*) and execute the **main.py** file by running either `python3 main.py` or `./main.py` on your terminal.
  - You can further create an alias to simplify things. 
- - Install the necessary modules. Your can use `pop install <module>` or any other methods. 
+ - Install the necessary modules. You can use `pop install <module>` or any other methods. 
  - The following modules are required:
+   - [x] argparse
    - [x] distro
    - [x] humanize
    - [x] netifaces
