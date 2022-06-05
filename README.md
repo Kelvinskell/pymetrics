@@ -53,7 +53,7 @@ You are welcome to view the `Contributing.md` file if you wish to contribute to 
 
 6. ##### Email Reports 
  - If a valid email address is specified in the configuration file, an email report will be sent to the address whenever the script is executed. 
- - Of course, this would only work if a working email server (Postfix) is present on the system. 
+ - Of course, this would only work if a working email server (e.g Postfix) is present on the system. 
    - **An email address can also be provided on the fly (at runtime) by using the `-e` or `--email` option**
 
 ## Installation And Usage 
