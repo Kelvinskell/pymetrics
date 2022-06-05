@@ -59,9 +59,13 @@ class DeleteLog():
 
     def deleteOldLogs(self):
         old_dates = []
-        for date in self.extracted_dates:
-            if date not in self.date_range:
-                old_dates.append(str(date).split()[0])
+        try:
+            # Handle exceptions for incorrect dates that cannot be parsed by strptime
+            for date in self.extracted_dates:
+                if date not in self.date_range:
+                    old_dates.append(str(date).split()[0])
+        except ValueError:
+            pass
 
         # Recurse through the directory and extract filenames
         nested_list = []
