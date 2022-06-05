@@ -85,7 +85,7 @@ except KeyError as key:
     print(message)
     sys.exit(1)
 except TypeError:
-    message = "pymetrics: Error: Missing value(s) in {config_file} \nExiting..."
+    message = f"pymetrics: Error: Missing value(s) in {config_file} \nExiting..."
     error.WriteToErrorLog(message).log()
     print(message)
     sys.exit(1)
