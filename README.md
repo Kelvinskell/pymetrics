@@ -18,7 +18,5 @@ This issue can be mitigated though with a little tweaking of the configuration f
 
 ___This is an ongoing project. Features and capabilities are being added on a continuous basis.___
 
-##Features
-
-
 You are welcome to view the `Contributing.md` file if you wish to contribute to this project.
+You Can also reach me directly on [LinkedIn](www.linkedin.com/in/kelvin-onuchukwu-3460871a1) 
