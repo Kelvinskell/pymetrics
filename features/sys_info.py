@@ -14,6 +14,7 @@ try:
     import requests
     import socket
     import shutil
+    import subprocess
     import sys
     from datetime import datetime
     from datetime import date
@@ -68,6 +69,9 @@ class SysFetch():
             self.total_disk = shutil.disk_usage('/').total
             self.free_disk = shutil.disk_usage('/').free
             self.used_disk = shutil.disk_usage('/').used
+            self.total_virt = psutil.virtual_memory().total
+            self.free_virt = psutil.virtual_memory().free
+            self.used_virt = psutil.virtual_memory().used
             self.values = values
             self.interfaces = netifaces.interfaces()
         except PermissionError as error:
@@ -120,22 +124,34 @@ class SysFetch():
         self.ip_addresses = ip_addresses
         return self.interface_names, self.ip_addresses
 
-    def check_disk(self):
+    def check_mem(self):
         free_disk = humanize.naturalsize(self.free_disk)
         total_disk = humanize.naturalsize(self.total_disk)
         used_disk = humanize.naturalsize(self.used_disk)
-        percent_used = self.used_disk / self.total_disk * 100
-        percent_free = self.free_disk / self.total_disk * 100
+        free_virt = humanize.naturalsize(self.free_virt)
+        total_virt = humanize.naturalsize(self.total_virt)
+        used_virt = humanize.naturalsize(self.used_virt)
+        percent_diskused = self.used_disk / self.total_disk * 100
+        percent_diskfree = self.free_disk / self.total_disk * 100
+        percent_virtused = self.used_virt / self.total_virt * 100
+        percent_virtfree = self.free_virt / self.total_virt * 100
         
         # Round off percent to 2 decimal places
-        percent_used = "{:.2f}".format(percent_used)
-        percent_free = "{:.2f}".format(percent_free)
+        percent_diskused = "{:.2f}".format(percent_diskused)
+        percent_diskfree = "{:.2f}".format(percent_diskfree)
+        percent_virtused = "{:.2f}".format(percent_virtused)
+        percent_virtfree = "{:.2f}".format(percent_virtfree)
 
-        disk_values = {"free": free_disk, 
-                "total": total_disk, 
-                "used": used_disk, 
-                "percentage free": "{}%".format(percent_free),
-                "percentage used": "{}%".format(percent_used)
+        disk_values = {"free disk": free_disk, 
+                "total disk": total_disk, 
+                "used_disk": used_disk,
+                "free virt mem": free_virt,
+                "total virt mem": total_virt,
+                "used virt mem": used_virt,
+                "percentage free disk": "{}%".format(percent_diskfree),
+                "percentage used disk": "{}%".format(percent_diskused),
+                "percent free virt mem": "{}%".format(percent_virtfree),
+                "percent used virt mem": "{}%".format(percent_virtused)
                 }
         self.disk_values = disk_values
         return self.disk_values
@@ -232,8 +248,8 @@ class LogSysFetch(SysFetch):
             jsonLog(fp=log_file, values=dict(ip_dict.items()))
 
 
-    def logDisk(self):
-        report = SysFetch.check_disk(self)
+    def logMem(self):
+        report = SysFetch.check_mem(self)
 
         # Read config file
         log_format = self.values["log_format"]

@@ -122,7 +122,7 @@ def logMetrics():
     log.logGeneral()
     log.logConnection()
     log.logInterface()
-    log.logDisk()
+    log.logMem()
     return True
 
 logMetrics()
