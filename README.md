@@ -7,14 +7,14 @@ This saves Linux users the time and effort of manually parsing the many log file
 
 pymetrics is a highly configurable logging tool. 
 It comes with its own configuration file, written in YAML, which can be modified to change certain behaviours of the program to suit the user's taste. 
-Users can even specify a different, custom configuration file which will be consumed by the script. 
+Users can even specify a different, custom configuration file which will be consumed by the program. 
 
-A full description of the capabilities of this script will be given under the **features** section.
+A full deprogramion of the capabilities of this program will be given under the **features** section.
 
 **Note:** pymetrics was not built with maximum portability in mind. 
 However, a great deal of effort was made to make it as portable as possible. 
 What this means in practice is that this tool is specially suited to run on Unix-like systems. 
-While this script will run on non-linux systems, it is likely to run into some unexpected issues - especially when handling log files.
+While this program will run on non-linux systems, it is likely to run into some unexpected issues - especially when handling log files.
 Also, collection of certain metrics will be omitted. 
 This issue can be mitigated though with a little tweaking of the configuration file. 
 
@@ -26,12 +26,12 @@ You are welcome to view the `Contributing.md` file if you wish to contribute to 
 ## Features
 
 1. ##### Configuration
- - pymetrics reads from its default configuration file, **pymetrics.conf.yml**. This configuration file is consumed by the script at execution and it defines the behaviour of the script. 
- - **A different configuration file can also be passed to the script by using the `-c` option.**
- - Any configuration file passed to the script must be written in YAML and must closely mirror the default configuration file. 
-   - Keys or values not provided in the configuration file are marked as illegal keys/values and the script will refuse to parse them. 
+ - pymetrics reads from its default configuration file, **pymetrics.conf.yml**. This configuration file is consumed by the program at execution and it defines the behaviour of the program. 
+ - **A different configuration file can also be passed to the program by using the `-c` option.**
+ - Any configuration file passed to the program must be written in YAML and must closely mirror the default configuration file. 
+   - Keys or values not provided in the configuration file are marked as illegal keys/values and the program will refuse to parse them. 
    - This can cause the program execution to fail. 
-   - **You can test your configuration file by running the script with the `-t` or `-T` option.**
+   - **You can test your configuration file by running the program with the `-t` or `-T` option.**
 
 2. ##### System Information 
  - pymetrics collects other system information like the OS name, OS type, nodename, active interfaces, current IP addresses, user statistics (number of logged in users and their time of login), disk usage information, virtual memory information, cpu statistics, network connectivity information, and so many more. 
@@ -39,12 +39,12 @@ You are welcome to view the `Contributing.md` file if you wish to contribute to 
 3. ##### Log File Analysis 
  - pymetrics searches specified log files and extracts useful information for logging. 
    - By default, pymetrics only analyses a handful of log files. But other log files can be included in the configuration file. 
-   - Only the files present in the configuration file can be parsed by the script. 
+   - Only the files present in the configuration file can be parsed by the program. 
  - pymetrics also specially analyses Web server logs, if present, and collects useful metrics from them. 
 
 4. ##### Log Access 
  - pymetrics logs a report each time it is executed. 
- - The access log information contains the date, time and user who executed the script. 
+ - The access log information contains the date, time and user who executed the program. 
 This can be useful for auditing purposes. 
 This is stored in the *access.log* file. 
 
@@ -64,7 +64,7 @@ This is stored in the *access.log* file.
    - **A different log format option can be specified at runtime by using the `-f` or `--format` option.** 
 
 7. ##### Email Reports 
- - If a valid email address is specified in the configuration file, an email report will be sent to the address whenever the script is executed. 
+ - If a valid email address is specified in the configuration file, an email report will be sent to the address anytime the program is executed. 
  - Of course, this would only work if a working email server (e.g Postfix) is present on the system. 
    - **An email address can also be provided on the fly (at runtime) by using the `-e` or `--email` option**
 
