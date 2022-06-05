@@ -314,7 +314,3 @@ class LogSysFetch(SysFetch):
         if log_format =="json":
             log_file = os.path.join(dirpath, f"report-{self.date}.json")
             jsonLog(fp=log_file, values=dict(values.items()))
-
-
-
-
