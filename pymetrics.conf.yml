@@ -7,18 +7,16 @@
 log_files:
   # log files to be monitored
   - /var/log/cron.log
-  - /var/log/auth.log # Debian based
-  - /var/log/secure # Red Hat based
-  - /var/log/syslog # Debian based
-  - /var/log/messages # Red Hat based
-  - /var/log/faillog
-  # AVAILABLE OPTIONS:
+  - /var/log/auth.log 
+  - /var/log/sudo.log
+  - /var/log/mail*
+  # SOON TO BE AVAILABLE OPTIONS ( NOT AVAILABLE CURRENTLY):
   # /var/log/ufw.log
   # /var/log/firewalld
-  # /var/log/mail.log
-  # /var/log/maillog
   # /var/log/boot.log
   # /var/log/kern.log
+  # /var/log/secure
+  # /var/log/auditd/audit.log
 
 log_report_format:
   plain_text
@@ -49,7 +47,7 @@ url:
         https://google.com
 timeout:
         # Connection timeout
-        10
+        5
 
 web_server:
   logs:
