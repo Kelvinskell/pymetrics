@@ -11,9 +11,11 @@ Users can even specify a different, custom configuration file which will be cons
 
 A full description of the capabilities of this script will be given under the **features** section.
 
-**Note:** pymetrics was not built with portability in mind. 
+**Note:** pymetrics was not built with maximum portability in mind. 
+However, a great deal of effort was made to make it as portable as possible. 
 What this means in practice is that this tool is specially suited to run on Unix-like systems. 
-While this script will run on non-linux systems, it is likely to run into some unexpected issues - especially when handling log files. 
+While this script will run on non-linux systems, it is likely to run into some unexpected issues - especially when handling log files.
+Also, collection of certain metrics will be omitted. 
 This issue can be mitigated though with a little tweaking of the configuration file. 
 
 ___This is an ongoing project. Features and capabilities are being added on a continuous basis.___
