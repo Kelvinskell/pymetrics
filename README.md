@@ -65,4 +65,4 @@ You are welcome to view the `Contributing.md` file if you wish to contribute to 
 
 It is my hope that this program will serve your purposes.
 
-Connect with me on [LinkedIn](www.linkedin.com/in/kelvin-onuchukwu-3460871a1) 
+Connect with me on [LinkedIn](https://www.linkedin.com/in/kelvin-onuchukwu-3460871a1) 
