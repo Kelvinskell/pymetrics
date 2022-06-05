@@ -23,4 +23,4 @@ Please make sure to update the README.md file as appropriate.
 - Finally, be sure to test your code before submitting changes
 
 
-You can also engage me directly on LinkedIn: `www.linkedin.com/in/kelvin-onuchukwu-3460871a1`
+You can also engage me directly on [LinkedIn](www.linkedin.com/in/kelvin-onuchukwu-3460871a1) 
