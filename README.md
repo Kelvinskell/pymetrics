@@ -16,6 +16,9 @@ What this means in practice is that this tool is specially suited to run on Unix
 While this script will run on non-linux systems, it is likely to run into some unexpected issues - especially when handling log files. 
 This issue can be mitigated though with a little tweaking of the configuration file. 
 
-__This is an ongoing project. Features and capabilities are being added on a continuous basis.__
+___This is an ongoing project. Features and capabilities are being added on a continuous basis.___
+
+##Features
+
 
 You are welcome to view the `Contributing.md` file if you wish to contribute to this project.
