@@ -64,7 +64,11 @@ You are welcome to view the `Contributing.md` file if you wish to contribute to 
  - You can further create an alias to simplify things. 
  - Install the necessary modules. Your can use `pop install <module>` or any other methods. 
  - The following modules are required:
-   - [x] 
+   - [x] distro
+   - [x] humanize
+   - [x] netifaces
+   - [x] pyyaml
+   - [x] requests
 
 
 It is my hope that this program will serve your purposes.
