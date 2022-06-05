@@ -42,19 +42,35 @@ You are welcome to view the `Contributing.md` file if you wish to contribute to 
 
 4. ##### Log Access 
  - pymetrics logs a report each time it is executed. 
- - The access log information contains the date, time and user who executed the script. This can be useful for auditing purposes. 
+ - The access log information contains the date, time and user who executed the script. 
+This can be useful for auditing purposes. 
+This is stored in the *access.log* file. 
+
+5. ##### Log Errors 
+ - pymetrics will print a message to the screen if it encounters an exception.
+ - Error messages are broadly categorised as *Error* and *Info*. 
+   - Error message means the program has encountered an exception which it couldn't handle. 
+   - Info message means the program encountered an exception, but was able to gracefully handle it. 
+   - Both errors from the *Error* and *Info* categories are logged in the *error.log file.* 
+  
  
-5. ##### Log Reports
+6. ##### Log Reports
  - Log reports are stored in the logs directory of the projects directory. 
  - By default, logs are stored in plain text. 
    - The configuration file can be edited to store the logs in other file formats.
    - Other accepted file formats are _csv_ and _json_. 
    - **A different log format option can be specified at runtime by using the `-f` or `--format` option.** 
 
-6. ##### Email Reports 
+7. ##### Email Reports 
  - If a valid email address is specified in the configuration file, an email report will be sent to the address whenever the script is executed. 
  - Of course, this would only work if a working email server (e.g Postfix) is present on the system. 
    - **An email address can also be provided on the fly (at runtime) by using the `-e` or `--email` option**
+
+8. ##### Garbage collection 
+ - pymetrics has a fully functional garbage collection utility built into it. 
+ - This utility handles the removal of old logs. 
+ - By default, log files older than 7 days are deleted. 
+   - This behaviour can be changed by modifying the configuration file. 
 
 ## Installation And Usage 
 
@@ -62,7 +78,7 @@ You are welcome to view the `Contributing.md` file if you wish to contribute to 
  - clone this repository to your local system (`git clone https://github.com/Kelvinskell/pymetrics.git` or `git clone git@github.com:Kelvinskell/pymetrics.git`). 
  - Switch (`cd`) into the cloned repository (*pymetrics*) and execute the **main.py** file by running either `python3 main.py` or `./main.py` on your terminal.
  - You can further create an alias to simplify things. 
- - Install the necessary modules. You can use `pop install <module>` or any other methods. 
+ - Install the necessary modules. You can use `pip install <module>` or any other methods. 
  - The following modules are required:
    - [x] argparse
    - [x] distro
@@ -70,6 +86,8 @@ You are welcome to view the `Contributing.md` file if you wish to contribute to 
    - [x] netifaces
    - [x] pyyaml
    - [x] requests
+
+**If program execution is successful, no output will be printed to the screen.**
 
 
 It is my hope that this program will serve your purposes.
