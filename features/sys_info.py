@@ -254,7 +254,7 @@ class LogSysFetch(SysFetch):
         # Read config file
         log_format = self.values["log_format"]
 
-        dirpath = "logs/disk_info"
+        dirpath = "logs/mem_info"
         if not os.path.isdir(dirpath):
             os.mkdir(dirpath)
 
