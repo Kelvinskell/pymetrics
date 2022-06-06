@@ -74,6 +74,7 @@ This is stored in the *access.log* file.
  - This utility handles the removal of old logs. 
  - By default, log files older than 7 days are deleted. 
    - This behaviour can be changed by modifying the configuration file. 
+ - pymetrics' garbage collection utility also deletes empty log files which might have been created by the application at runtime.
 
 ## Installation And Usage 
 
