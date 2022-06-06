@@ -62,13 +62,13 @@ class Logs():
         logfile = open(os.path.join(dirpath1, filepath), 'w')
 
         # Log to file
-        anacronpattern = r'{}.*anacron'.format(logdate) 
-        cronpattern = r'{}.*CRON'.format(logdate)
+        anacronpattern = r"^(Jun  6) ([:\d]+) (.*?)anacron\[\d+\]".format(logdate) 
+        cronpattern = r"^({}) ([:\d]+) (.*?)CRON\[\d+\]".format(logdate)
         with open(cron) as file:
             lines = file.readlines()
             for i in range(0, len(lines)):
                 line = lines[i]
-                if re.search(f'^{cronpattern}', line):
+                if re.search(f'{cronpattern}', line):
                     logfile.write(line)
         logfile.close()
 
@@ -80,7 +80,7 @@ class Logs():
             lines = file.readlines()
             for i in range(0, len(lines)):
                 line = lines[i]
-                if re.search(f'^{anacronpattern}', line):
+                if re.search(f'{anacronpattern}', line):
                     logfile.write(line)
         logfile.close()
 
