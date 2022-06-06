@@ -156,7 +156,7 @@ logMetrics()
 
 # Log Metrics errors
 if not logs.logSudo():
-    message = "pymetrics: info: Unable to collect metrics for sudo.log: file does not exist or you do not have enough permissions."
+    message = "pymetrics: Info: Unable to collect metrics for sudo.log: file does not exist or you do not have enough permissions."
     error.WriteToErrorLog(message).log()
 
 # Garbage collection
