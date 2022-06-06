@@ -7,8 +7,7 @@ from datetime import datetime
 
 logdate = datetime.now().strftime('%b %e')
 date = datetime.today().strftime('%Y-%m-%d')
-time = datetime.today().strftime('%H:%M:%S')
-user = os.getlogin()
+filepath = f'report-{date}.txt'
 
 class Logs():
         ########## Garbage collection will remove any empty files ##########
@@ -24,7 +23,6 @@ class Logs():
 
         # Create path
         dirpath = 'logs/sudo'
-        filepath = f'report-{date}.txt'
 
         # Open file
         if not os.path.isdir(dirpath):
@@ -54,7 +52,6 @@ class Logs():
         # Create path
         dirpath1 = 'logs/cron'
         dirpath2 = 'logs/anacron'
-        filepath = f'report-{date}.txt'
 
         # Open file
         if not os.path.isdir(dirpath1):
@@ -83,5 +80,30 @@ class Logs():
                 if re.search(f'{anacronpattern}', line):
                     logfile.write(line)
         logfile.close()
+        return True
 
+    def logAuth(self):
+        # Check file existence and read access
+        if "/var/log/auth.log" in self.values["log_files"]:
+            auth = '/var/log/auth.log'
+        if not os.access(auth, os.F_OK) or not os.access(auth, os.R_OK):
+            return False
+
+        # Create path
+        dirpath = 'logs/auth'
+
+        # Open file
+        if not os.path.isdir(dirpath):
+            os.mkdir(dirpath)
+        logfile = open(os.path.join(dirpath, filepath), 'w')
+
+        authpattern = r"^(Jun  6) ([:\d]+) (.*?)(sshd|systemd-logind)\[\d+\]".format(logdate) 
+
+        with open(auth) as file:
+            lines = file.readlines()
+            for i in range(0, len(lines)):
+                line = lines[i]
+                if re.search(f'{authpattern}', line):
+                    logfile.write(line)
+        logfile.close()
         return True
