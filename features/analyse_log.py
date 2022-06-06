@@ -19,7 +19,7 @@ class Logs():
         for file in self.values["log_files"]:
             if file == "/var/log/sudo.log":
                 sudo = file
-        if not os.access(sudo, os.F_OK) or os.access(sudo, os.R_OK):
+        if not os.access(sudo, os.F_OK) or not os.access(sudo, os.R_OK):
             return False
         
 
@@ -34,7 +34,7 @@ class Logs():
 
         # Log to file
         pattern = r'{}'.format(logdate)
-        with open('sudo.log') as file:
+        with open(sudo) as file:
             lines = file.readlines()
             for i in range(0, len(lines)):
                 line1 = lines[i]
