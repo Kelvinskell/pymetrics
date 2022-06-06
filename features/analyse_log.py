@@ -11,17 +11,16 @@ time = datetime.today().strftime('%H:%M:%S')
 user = os.getlogin()
 
 class Logs():
+        ########## Garbage collection will remove any empty files ##########
     def __init__(self, values):
         self.values = values
 
     def logSudo(self):
         # Check file existence and read access
-        for file in self.values["log_files"]:
-            if file == "/var/log/sudo.log":
-                sudo = file
+        if "/var/log/sudo.log" in self.values["log_files"]:
+            sudo = '/var/log/sudo.log'
         if not os.access(sudo, os.F_OK) or not os.access(sudo, os.R_OK):
             return False
-        
 
         # Create path
         dirpath = 'logs/sudo'
@@ -44,7 +43,45 @@ class Logs():
                     logfile.write(line2)
         logfile.close()
         return True
-        ########## Garbage collection will remove any empty files ##########
-   
 
+    def logCron(self):
+        # Check file existence and read access
+        if "/var/log/cron.log" in self.values["log_files"]:
+            cron = '/var/log/cron.log'
+        if not os.access(cron, os.F_OK) or not os.access(cron, os.R_OK):
+            return False
+        
+        # Create path
+        dirpath1 = 'logs/cron'
+        dirpath2 = 'logs/anacron'
+        filepath = f'report-{date}.txt'
 
+        # Open file
+        if not os.path.isdir(dirpath1):
+            os.mkdir(dirpath1)
+        logfile = open(os.path.join(dirpath1, filepath), 'w')
+
+        # Log to file
+        anacronpattern = r'{}.*anacron'.format(logdate) 
+        cronpattern = r'{}.*CRON'.format(logdate)
+        with open(cron) as file:
+            lines = file.readlines()
+            for i in range(0, len(lines)):
+                line = lines[i]
+                if re.search(f'^{cronpattern}', line):
+                    logfile.write(line)
+        logfile.close()
+
+        if not os.path.isdir(dirpath2):
+            os.mkdir(dirpath2)
+        logfile = open(os.path.join(dirpath2, filepath), 'w')
+
+        with open(cron) as file:
+            lines = file.readlines()
+            for i in range(0, len(lines)):
+                line = lines[i]
+                if re.search(f'^{anacronpattern}', line):
+                    logfile.write(line)
+        logfile.close()
+
+        return True

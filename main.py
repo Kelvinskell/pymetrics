@@ -150,6 +150,7 @@ def logMetrics():
     log.logMem()
     log.logLogin()
     logs.logSudo()
+    logs.logCron()
     return True
 
 logMetrics()
