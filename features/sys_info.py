@@ -295,22 +295,23 @@ class LogSysFetch(SysFetch):
 
     def logLogin(self):
         report = SysFetch.check_login(self)
+        if report:
 
             # Read config file
-        log_format = self.values["log_format"]
+            log_format = self.values["log_format"]
 
-        dirpath = "logs/login_info"
-        if not os.path.isdir(dirpath):
-            os.mkdir(dirpath)
+            dirpath = "logs/login_info"
+            if not os.path.isdir(dirpath):
+                os.mkdir(dirpath)
 
-        values = self.login_values
+            values = self.login_values
 
-        #Log plain text
-        if log_format == "plain_text":
-            log_file = os.path.join(dirpath, f"report-{self.date}.txt")
-            plainLog(fp=log_file, values=values.items())
+            #Log plain text
+            if log_format == "plain_text":
+                log_file = os.path.join(dirpath, f"report-{self.date}.txt")
+                plainLog(fp=log_file, values=values.items())
 
-        # Log json
-        if log_format =="json":
-            log_file = os.path.join(dirpath, f"report-{self.date}.json")
-            jsonLog(fp=log_file, values=dict(values.items()))
+                # Log json
+                if log_format =="json":
+                    log_file = os.path.join(dirpath, f"report-{self.date}.json")
+                    jsonLog(fp=log_file, values=dict(values.items()))
