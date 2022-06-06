@@ -140,7 +140,7 @@ logAccess()
 # Collect system information
 info = sys_info.SysFetch(values)
 log = sys_info.LogSysFetch(values)
-analyse_log.logSudo(values)
+logs = analyse_log.Logs(values)
 
 # Send collected metrics to logs
 def logMetrics():
@@ -149,6 +149,7 @@ def logMetrics():
     log.logInterface()
     log.logMem()
     log.logLogin()
+    logs.logSudo()
     return True
 
 logMetrics()
