@@ -82,6 +82,10 @@ class DeleteLog():
                         if re.search(date, filename):
                             pathname = os.path.join(parentdir, filename)
                             if os.path.exists(pathname):
-                                os.remove(os.path.join(parentdir, filename))
+                                os.remove(pathname)
 
-
+                        # Delete empty log files
+                        if os.stat(filename).st_size == 0:
+                            pathname = os.path.join(parentdir, filename)
+                            if os.path.exists(pathname):
+                                os.remove(pathname)
