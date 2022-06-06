@@ -6,6 +6,11 @@ from features import error
 # Import access
 from features import access
 
+from features import config_parse
+from features import sys_info
+from features import analyse_log
+from features import delete_log
+
 # Import modules
 try:
     import argparse
@@ -14,9 +19,7 @@ try:
 except ModuleNotFoundError as error:
     message = f"pymetrics: Error: {error}. \nUse 'pip install' to install module"
     error.WriteToErrorLog(message).log()
-    print(message)
-    
-from features import config_parse
+    print(message)    
 
 # Create the parser
 parser = argparse.ArgumentParser(prog="pymetrics", description="Collect, analyse and report useful system meyrics", allow_abbrev=False, epilog="Enjoy the program!")
@@ -135,9 +138,9 @@ def logAccess():
 logAccess()
 
 # Collect system information
-from features import sys_info
 info = sys_info.SysFetch(values)
 log = sys_info.LogSysFetch(values)
+analyse_log.logSudo(values)
 
 # Send collected metrics to logs
 def logMetrics():
@@ -151,6 +154,6 @@ def logMetrics():
 logMetrics()
 
 # Garbage collection
-from features import delete_log
 gc = delete_log.DeleteLog(values)
 gc.deleteOldLogs()
+
