@@ -2,14 +2,15 @@
 
 **pymetrics** is an exceptionally efficient and simple logging tool for capturing and analysing important system information.
 
-This program basically dives into linux logs, captures data, and aggregates them into a single location after analysing them. 
+This command line application basically dives into linux logs, captures data, and aggregates them into a single location after analysing them. 
 This saves Linux users the time and effort of manually parsing the many log files, which is in itself an inefficient and error-prone process.
 
 pymetrics is a highly configurable logging tool. 
-It comes with its own configuration file, written in YAML, which can be modified to change certain behaviours of the program to suit the user's taste. 
+It comes with its own configuration file, written in YAML, which can be modified to change certain behaviours of the application to suit the user's taste. 
 Users can even specify a different, custom configuration file which will be consumed by the program. 
 
-A full deprogramion of the capabilities of this program will be given under the **features** section.
+A full description of the capabilities of this application will be given under the **features** section.
+
 
 **Note:** pymetrics was not built with maximum portability in mind. 
 However, a great deal of effort was made to make it as portable as possible. 
@@ -51,8 +52,8 @@ This is stored in the *access.log* file.
 5. ##### Log Errors 
  - pymetrics will print a message to the screen if it encounters an exception.
  - Error messages are broadly categorised as *Error* and *Info*. 
-   - Error message means the program has encountered an exception which it couldn't handle. 
-   - Info message means the program encountered an exception, but was able to gracefully handle it. 
+   - Error message means the application has encountered an exception which it couldn't handle. 
+   - Info message means the application encountered an exception, but was able to gracefully handle it. 
    - Both errors from the *Error* and *Info* categories are logged in the *error.log file.* 
   
  
@@ -76,7 +77,7 @@ This is stored in the *access.log* file.
 
 ## Installation And Usage 
 
-**To be able to use this program;**
+**To be able to use this application;**
  - clone this repository to your local system (`git clone https://github.com/Kelvinskell/pymetrics.git` or `git clone git@github.com:Kelvinskell/pymetrics.git`). 
  - Switch (`cd`) into the cloned repository (*pymetrics*) and execute the **main.py** file by running either `python3 main.py` or `./main.py` on your terminal.
  - You can further create an alias to simplify things. 
@@ -92,6 +93,6 @@ This is stored in the *access.log* file.
 **If program execution is successful, no output will be printed to the screen.**
 
 
-It is my hope that this program will serve your purposes.
+It is my hope that this application will serve your purposes.
 
 Connect with me on [LinkedIn](https://www.linkedin.com/in/kelvin-onuchukwu-3460871a1) 
