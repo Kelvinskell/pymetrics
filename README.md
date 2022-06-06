@@ -55,6 +55,7 @@ This is stored in the *access.log* file.
    - Error message means the application has encountered an exception which it couldn't handle. 
    - Info message means the application encountered an exception, but was able to gracefully handle it. 
    - Both errors from the *Error* and *Info* categories are logged in the *error.log file.* 
+   - This file should be your first port of call when something in the application does not work as expected.
   
  
 6. ##### Log Reports
