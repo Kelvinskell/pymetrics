@@ -85,11 +85,10 @@ This is stored in the *access.log* file.
  - You can further create an alias to simplify things. 
  - Install the necessary modules. You can use `pip install <module>` or any other methods. 
  - The following modules are required:
-   - [x] argparse
    - [x] distro
    - [x] humanize
    - [x] netifaces
-   - [x] pyyaml
+   - [x] pyYAML
    - [x] requests
 
 **If program execution is successful, no output will be printed to the screen.**
