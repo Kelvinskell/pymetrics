@@ -59,7 +59,7 @@ class Logs():
         logfile = open(os.path.join(dirpath1, filepath), 'w')
 
         # Log to file
-        anacronpattern = r"^(Jun  6) ([:\d]+) (.*?)anacron\[\d+\]".format(logdate) 
+        anacronpattern = r"^({}) ([:\d]+) (.*?)anacron\[\d+\]".format(logdate) 
         cronpattern = r"^({}) ([:\d]+) (.*?)CRON\[\d+\]".format(logdate)
         with open(cron) as file:
             lines = file.readlines()
@@ -97,7 +97,7 @@ class Logs():
             os.mkdir(dirpath)
         logfile = open(os.path.join(dirpath, filepath), 'w')
 
-        authpattern = r"^(Jun  6) ([:\d]+) (.*?)(sshd|systemd-logind)\[\d+\]".format(logdate) 
+        authpattern = r"^({}) ([:\d]+) (.*?)(sshd|systemd-logind)\[\d+\]".format(logdate) 
 
         with open(auth) as file:
             lines = file.readlines()
