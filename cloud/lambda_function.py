@@ -19,6 +19,9 @@ def lambda_handler(event, context):
             MessageStructure = 'json'
             )
 
+        # log to AWS CloudWatch
+        logger.info('Function {} has executed.'.format(context.function_name))
+
         return {
             'statusCode': 200,
             'body': json.dumps(response)
