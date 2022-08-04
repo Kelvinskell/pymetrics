@@ -32,6 +32,8 @@ You are welcome to view the `Contributing.md` file if you wish to contribute to 
  - pymetrics also fetures a lambda function that notifies you whenever your log files are uploaded to the preconfigued S3 bucket.
    - This lambda function is fully robust and has error-handling capabilities embeded in it. However, you will need to modify it in order to add the arn (Amazon Resource Name) of your SNS Service.
    - You will also need to manually configure the S3 bucket as a trigger for the lambda function.
+ - This lambda function is also designed to log its activities to CloudWatch for reference or debugging purposes.
+   - Thus appropriate permissions must be granted in the IAM role which the function will have to assume.
     
 2. ##### Configuration
  - pymetrics reads from its default configuration file, **pymetrics.conf.yml**. This configuration file is consumed by the program at execution and it defines the behaviour of the program. 
