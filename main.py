@@ -10,6 +10,7 @@ from features import config_parse
 from features import sys_info
 from features import analyse_log
 from features import delete_log
+from cloud.s3 import uploadS3
 
 # Import modules
 try:
@@ -87,9 +88,6 @@ try:
     cloud = parsed_values["cloud"]
     if cloud["active"]:
        region = cloud["config"][0]["region"] 
-       profile = cloud["config"][1]["profile"]
-       access_key = cloud["credentials"][0]["access_key"]
-       secret_key = cloud["credentials"][1]["secret_key"]
        bucket = cloud["s3_bucket_name"]
 
        # Disable cloud operations if bucket name is not valid.
@@ -182,3 +180,6 @@ if not logs.logSudo():
 gc = delete_log.DeleteLog(values)
 gc.deleteOldLogs()
 
+# Upload log files to S3 
+if cloud["active"]:
+    uploadS3(region, bucket)
