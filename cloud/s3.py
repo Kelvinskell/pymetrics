@@ -22,6 +22,3 @@ def uploadS3(*args):
             with open(absolute_path, 'rb') as data:
                 bucket.put_object(Key=absolute_path, Body=data)
          
-
-
-#uploadS3('us-east-1', 'pymetrics')
