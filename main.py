@@ -82,6 +82,23 @@ try:
     web_data = parsed_values["web_server"]["data"]
     timeout = parsed_values["timeout"]
     url = parsed_values["url"]
+
+    # Parse cloud conifguration options if enabled
+    cloud = parsed_values["cloud"]
+    if cloud["active"]:
+       region = cloud["config"][0]["region"] 
+       profile = cloud["config"][1]["profile"]
+       access_key = cloud["credentials"][0]["access_key"]
+       secret_key = cloud["credentials"][1]["secret_key"]
+       bucket = cloud["s3_bucket_name"]
+
+       # Disable cloud operations if bucket name is not valid.
+       if bucket is None:
+           message = "pymetrics: Info: S3 bucket name cannot be Null. \nCloud operations will not be performed."
+           error.WriteToErrorLog(message).log()
+           print(message)
+           cloud["active"] = False
+
 except KeyError as key:
     message = f"pymetrics: Error: Key {key} is missing in {config_file} \nExitting..."
     error.WriteToErrorLog(message).log()
@@ -123,7 +140,7 @@ values = {"log_files": log_files, "log_format": log_format, "delete_logs": delet
 # Check for Illegal keys in config file
 for key in parsed_values.keys():
     if key not in values.keys():
-        if key in ["email_address", "log_report_format", "web_server"]:
+        if key in ["email_address", "log_report_format", "web_server", "cloud"]:
             pass
         else:
             message = "pymetrics: Info: Illegal key: {} in {}".format(key, config_file)
