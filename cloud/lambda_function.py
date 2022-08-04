@@ -10,7 +10,7 @@ import logging
 
 def lambda_handler(event, context):
         sns = boto3.client('sns')
-        arn = 'arn of your AWS SNS' # Your arn should be the arn of the particular
+        arn = 'arn of your AWS SNS' # Your arn should be the arn of the particular SNS Service
         bucket_name = event['Records'][0]['s3']['bucket']['name']
         notification = f'pymetrics: System report logs have been uploaded into your S3 bucket ({bucket_name})'
 
