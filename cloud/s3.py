@@ -18,7 +18,6 @@ def uploadS3(*args):
     for subdir, dirs, files in os.walk('logs'):
         for file in files:
             absolute_path = os.path.join(subdir, file)
-            print(absolute_path)
             with open(absolute_path, 'rb') as data:
                 bucket.put_object(Key=absolute_path, Body=data)
          
