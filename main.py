@@ -181,5 +181,11 @@ gc = delete_log.DeleteLog(values)
 gc.deleteOldLogs()
 
 # Upload log files to S3 
+# Log error message if function fails
 if cloud["active"]:
-    uploadS3(region, bucket)
+    if not uploadS3(region, bucket):
+        message = "Pymetrics: Error: Unable to connect to Aws S3 Endpoint"
+        error.WriteToErrorLog(message).log()
+        print(message)
+# Exit program
+sys.exit()
