@@ -8,6 +8,9 @@ import json
 import boto3
 import logging
 
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
+
 def lambda_handler(event, context):
         sns = boto3.client('sns')
         arn = 'arn of your AWS SNS' # Your arn should be the arn of the particular SNS Service
