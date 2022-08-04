@@ -62,7 +62,7 @@ cloud:
   active: true # Set as false to disable cloud logging features.
   config:
     - region: us-east-1
-  s3_bucket_name: pymetrics
+  s3_bucket_name: pymetrics #Bucket name must be globally unique
 
 # Use the -t option for syntax cjeck
 # Use the -T option for syntax cjwck and printing out the configiration.
