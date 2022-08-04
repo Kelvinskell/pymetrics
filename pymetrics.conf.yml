@@ -58,5 +58,17 @@ web_server:
     - /var/www/apache2
     - /var/www/httpd
 
+# The application will attempt to use the default global environmental variables for any empty parameter
+# It is very advicable to leave the access_key and secret_key parameters below empty. The global configuration, if set, will be used.
+cloud:
+  active: true # Set as false to disable cloud logging features.
+  config:
+    - region: us-east-1
+    - profile:
+  credentials:
+    - access_key: 
+    - secret_key:
+  s3_bucket_name: pymetrics
+
 # Use the -t option for syntax cjeck
 # Use the -T option for syntax cjwck and printing out the configiration.
