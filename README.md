@@ -26,6 +26,13 @@ You are welcome to view the `Contributing.md` file if you wish to contribute to 
 
 ## Features
 1. ##### Cloud Integration
+ - pymetrics beutifully integrates with your AWS environment by storing log reports in an S3 bucket.
+   - This is an optional feature which can be enabled by modifying the configuration file.
+   - This feature will not work correctly unless your AWS environment has been properly configured through the `aws configure` CLI command.
+ - pymetrics also fetures a lambda function that notifies you whenever your log files are uploaded to the preconfigued S3 bucket.
+   - This lambda function is fully robust and has error-handling capabilities embeded in it. However, you will need to modify it in order to add the arn (Amazon Resource Name) of your SNS Service.
+   - You will also need to manually configure the S3 bucket as a trigger for the lambda function.
+    
 2. ##### Configuration
  - pymetrics reads from its default configuration file, **pymetrics.conf.yml**. This configuration file is consumed by the program at execution and it defines the behaviour of the program. 
  - **A different configuration file can also be passed to the program by using the `-c` option.**
