@@ -2,7 +2,7 @@
 
 import boto3
 import os
-from botocore.exceptions import EndpointConnectionError as error
+from botocore.exceptions import EndpointConnectionError as net_error
 
 def uploadS3(*args):
     region = args[0]
@@ -14,15 +14,14 @@ def uploadS3(*args):
             )
 
     # Connect session to S3
-    s3 = session.resource('s3')
-    bucket = s3.Bucket(bucket_name)
+    s3 = session.client('s3')
     try:
       for subdir, dirs, files in os.walk('logs'):
           for file in files:
               absolute_path = os.path.join(subdir, file)
               with open(absolute_path, 'rb') as data:
-                  bucket.put_object(Key=absolute_path, Body=data)
+                  s3.put_object(Bucket=bucket_name, Key=absolute_path, Body=data)
       return True
-    except error:
+    except (net_error, s3.exceptions.NoSuchBucket):
         return False
          

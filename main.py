@@ -184,7 +184,7 @@ gc.deleteOldLogs()
 # Log error message if function fails
 if cloud["active"]:
     if not uploadS3(region, bucket):
-        message = "Pymetrics: Error: Unable to connect to Aws S3 Endpoint"
+        message = "Pymetrics: Error: Unable to connect to Aws S3 Endpoint or BucketName does not exist."
         error.WriteToErrorLog(message).log()
         print(message)
 # Exit program
