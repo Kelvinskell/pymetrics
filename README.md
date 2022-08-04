@@ -25,8 +25,8 @@ You are welcome to view the `Contributing.md` file if you wish to contribute to 
 
 
 ## Features
-
-1. ##### Configuration
+1. ##### Cloud Integration
+2. ##### Configuration
  - pymetrics reads from its default configuration file, **pymetrics.conf.yml**. This configuration file is consumed by the program at execution and it defines the behaviour of the program. 
  - **A different configuration file can also be passed to the program by using the `-c` option.**
  - Any configuration file passed to the program must be written in YAML and must closely mirror the default configuration file. 
@@ -34,22 +34,22 @@ You are welcome to view the `Contributing.md` file if you wish to contribute to 
    - This can cause the program execution to fail. 
    - **You can test your configuration file by running the program with the `-t` or `-T` option.**
 
-2. ##### System Information 
+3. ##### System Information 
  - pymetrics collects other system information like the OS name, OS type, nodename, active interfaces, current IP addresses, user statistics (number of logged in users and their time of login), disk usage information, virtual memory information, cpu statistics, network connectivity information, and so many more. 
 
-3. ##### Log File Analysis 
+4. ##### Log File Analysis 
  - pymetrics searches specified log files and extracts useful information for logging. 
    - By default, pymetrics only analyses a handful of log files. But other log files can be included in the configuration file. 
    - Only the files present in the configuration file can be parsed by the program. 
  - pymetrics also specially analyses Web server logs, if present, and collects useful metrics from them. 
 
-4. ##### Log Access 
+5. ##### Log Access 
  - pymetrics logs a report each time it is executed. 
  - The access log information contains the date, time and user who executed the program. 
 This can be useful for auditing purposes. 
 This is stored in the *access.log* file. 
 
-5. ##### Log Errors 
+6. ##### Log Errors 
  - pymetrics will print a message to the screen if it encounters an exception.
  - Error messages are broadly categorised as *Error* and *Info*. 
    - Error message means the application has encountered an exception which it couldn't handle. 
@@ -58,19 +58,19 @@ This is stored in the *access.log* file.
    - This file should be your first port of call when something in the application does not work as expected.
   
  
-6. ##### Log Reports
+7. ##### Log Reports
  - Log reports are stored in the logs directory of the projects directory. 
  - By default, logs are stored in plain text. 
    - The configuration file can be edited to store the logs in other file formats.
    - Other accepted file formats are _csv_ and _json_. 
    - **A different log format option can be specified at runtime by using the `-f` or `--format` option.** 
 
-7. ##### Email Reports 
+8. ##### Email Reports 
  - If a valid email address is specified in the configuration file, an email report will be sent to the address anytime the program is executed. 
  - Of course, this would only work if a working email server (e.g Postfix) is present on the system. 
    - **An email address can also be provided on the fly (at runtime) by using the `-e` or `--email` option**
 
-8. ##### Garbage collection 
+9. ##### Garbage collection 
  - pymetrics has a fully functional garbage collection utility built into it. 
  - This utility handles the removal of old logs. 
  - By default, log files older than 7 days are deleted. 
