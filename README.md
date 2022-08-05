@@ -99,6 +99,7 @@ This is stored in the *access.log* file.
    - [x] netifaces
    - [x] pyYAML
    - [x] requests
+   - [x] boto3
 
 **If program execution is successful, no output will be printed to the screen.**
 
