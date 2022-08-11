@@ -3,6 +3,10 @@
 import boto3
 import os
 from botocore.exceptions import EndpointConnectionError as net_error
+from dotenv import load_dotenv
+
+# Load Environmetal variables
+load_dotenv()
 
 def uploadS3(*args):
     region = args[0]
@@ -10,7 +14,9 @@ def uploadS3(*args):
 
     # Create AWS session
     session = boto3.Session(
-            region_name=region
+            region_name=REGION,
+            aws_access_key_id=os.getenv('ACCESS_KEY'),
+            aws_secret_access_key=os.getenv('SECRET_KEY')
             )
 
     # Connect session to S3
