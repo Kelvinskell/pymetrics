@@ -3,6 +3,7 @@
 # Import modules
 try:
     import os
+    import pwd
     import socket
     import platform
     from datetime import datetime
@@ -15,7 +16,8 @@ class WriteToErrorLog():
     def __init__(self, message):
         # Collect system information
         self.system_type = platform.system()
-        self.user = os.getlogin()
+        # self.user = os.getlogin()
+        self.user = pwd.getpwuid(os.geteuid())[0]
         self.nodename = socket.gethostname()
         self.date = date.today()
         self.time = datetime.now().strftime("%H:%M:%S")

@@ -2,6 +2,7 @@
 
 # Import modules
 try:
+    import pwd
     import csv
     import distro
     import humanize
@@ -70,7 +71,8 @@ class SysFetch():
             self.distro = distro.id()
             self.nodename = socket.gethostname()
             self.os_type = platform.system()
-            self.user = os.getlogin()
+            # self.user = os.getlogin()
+            self.user = pwd.getpwuid(os.geteuid())[0]
             self.version = platform.release()
             self.date = date.today()
             self.time = datetime.now().strftime("%H:%M:%S")
