@@ -1,0 +1,7 @@
+boto3
+distro
+humanize
+netifaces
+psutil
+PyYAML
+requests
