@@ -8,4 +8,6 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
-CMD ["python", "main.py"]
+ENV OPTION=''
+
+CMD ["sh", "-c", "python main.py ${OPTION}"]
