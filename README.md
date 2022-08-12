@@ -88,6 +88,8 @@ This is stored in the *access.log* file.
 
 ## Installation And Usage 
 
+# Local Installation
+
 **To be able to use this application;**
  - clone this repository to your local system (`git clone https://github.com/Kelvinskell/pymetrics.git` or `git clone git@github.com:Kelvinskell/pymetrics.git`). 
  - Switch (`cd`) into the cloned repository (*pymetrics*) and execute the **main.py** file by running either `python3 main.py` or `./main.py` on your terminal.
@@ -103,6 +105,8 @@ This is stored in the *access.log* file.
    - [x] requests
    - [x] boto3
  - Alternatively simply execute `pip install -r requirements.txt` to get these modules and other necessary dependencies installed.
+
+# Container Installation
 
 **If program execution is successful, no output will be printed to the screen.**
 
