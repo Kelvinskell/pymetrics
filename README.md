@@ -109,24 +109,29 @@ This is stored in the *access.log* file.
 ### Container Usage 
 To run this application in a docker container, you have to build an image of it. And there are a few options available. 
 Firstly, you can simply pull an image of this application from Dockerhub. 
-
-Simply run `docker pull kelvinskell/pymetrics:latest` to pull the image from DockerHub. 
+Simply run `docker pull kelvinskell/pymetrics:latest` to pull the image from DockerHub.
+ 
 Alternatively, you can manually build the image from this repository:
  - Clone the repo 
  - Navigate to the project directory 
  - Execute `docker build.`
+
 
 Create a __.env__ file in the _cloud_ directory for storing your environmental variables. 
 This file should contain values for your AWS credentials such as 
  - region 
  - aws_secret_access_id
  - aws_secret_key
-Use the _OPTION_ environmental argument to optimally set your options for running the app. 
+
+Use the _OPTION_ environmental argument to set your options for running the app. 
 
 For example to run this app and log the analysis results in a json format: 
 Execute **`docker run -it --env-file ./cloud/.env -e OPTION='-f json' kelvinskell/pymetrics:latest`**
 
-You can use `docker logs CONTAINER_NAME` to check your container for error output, if any. 
+You can also run the container in detached mode:
+Execute `docker run -d  --env-file ./cloud/.env kelvinskell/pymetrics:latest`
+
+Use `docker logs CONTAINER_NAME` to check your container for error output, if any. 
 
 **If program execution is successful, no output will be printed to the screen.**
 
