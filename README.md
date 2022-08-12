@@ -5,7 +5,7 @@
 This command line application basically dives into linux logs, captures data, and aggregates them into a single location after analysing them. 
 This saves Linux users the time and effort of manually parsing the many log files, which is in itself an inefficient and error-prone process.
 
-pymetrics is a highly configurable logging tool. 
+pymetrics is a highly configurable, containerizable logging tool. 
 It comes with its own configuration file, written in YAML, which can be modified to change certain behaviours of the application to suit the user's taste. 
 Users can even specify a different, custom configuration file which will be consumed by the program. 
 
@@ -88,7 +88,7 @@ This is stored in the *access.log* file.
 
 ## Installation And Usage 
 
-# Local Installation
+### Local Installation
 
 **To be able to use this application;**
  - clone this repository to your local system (`git clone https://github.com/Kelvinskell/pymetrics.git` or `git clone git@github.com:Kelvinskell/pymetrics.git`). 
@@ -106,7 +106,22 @@ This is stored in the *access.log* file.
    - [x] boto3
  - Alternatively simply execute `pip install -r requirements.txt` to get these modules and other necessary dependencies installed.
 
-# Container Installation
+### Container Usage 
+To run this application in a docker container, you have to build an image of it. And there are a few options available. 
+Firstly, you can simply pull an image of this application from Dockerhub. 
+
+Simply run `docker pull kelvinskell/pymetrics:latest` to pull the image from DockerHub. 
+Alternatively, you can manually build the image from this repository. 
+ - Clone the repo 
+ - Navigate to the project directory 
+ - Execute `docker build.`
+
+Create a __.env__ file for storing your environmental variables. 
+The file should contain values for your AWS credentials such as 
+ - region 
+ - aws_secret_access_id
+ - aws_secret_key
+
 
 **If program execution is successful, no output will be printed to the screen.**
 
