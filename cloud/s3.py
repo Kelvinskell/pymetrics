@@ -14,7 +14,7 @@ def uploadS3(*args):
 
     # Create AWS session
     session = boto3.Session(
-            region_name=REGION,
+            region_name=os.getenv('REGION'),
             aws_access_key_id=os.getenv('ACCESS_KEY'),
             aws_secret_access_key=os.getenv('SECRET_KEY')
             )
