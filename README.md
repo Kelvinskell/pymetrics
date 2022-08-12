@@ -97,9 +97,12 @@ This is stored in the *access.log* file.
    - [x] distro
    - [x] humanize
    - [x] netifaces
+   - [x] psutil
+   - [x] python-dotenv
    - [x] pyYAML
    - [x] requests
    - [x] boto3
+ - Alternatively simply execute `pip install -r requirements.txt` to get these modules and other necessary dependencies installed.
 
 **If program execution is successful, no output will be printed to the screen.**
 
