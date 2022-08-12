@@ -111,17 +111,22 @@ To run this application in a docker container, you have to build an image of it.
 Firstly, you can simply pull an image of this application from Dockerhub. 
 
 Simply run `docker pull kelvinskell/pymetrics:latest` to pull the image from DockerHub. 
-Alternatively, you can manually build the image from this repository. 
+Alternatively, you can manually build the image from this repository:
  - Clone the repo 
  - Navigate to the project directory 
  - Execute `docker build.`
 
-Create a __.env__ file for storing your environmental variables. 
-The file should contain values for your AWS credentials such as 
+Create a __.env__ file in the _cloud_ directory for storing your environmental variables. 
+This file should contain values for your AWS credentials such as 
  - region 
  - aws_secret_access_id
  - aws_secret_key
+Use the _OPTION_ environmental argument to optimally set your options for running the app. 
 
+For example to run this app and log the analysis results in a json format: 
+Execute **`docker run -it --env-file ./cloud/.env -e OPTION='-f json' kelvinskell/pymetrics:latest`**
+
+You can use `docker logs CONTAINER_NAME` to check your container for error output, if any. 
 
 **If program execution is successful, no output will be printed to the screen.**
 
