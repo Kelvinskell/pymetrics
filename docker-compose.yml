@@ -1,0 +1,13 @@
+version: "3.8"
+services:
+  pymetrics:
+    build: ./
+    container_name: pymetrics
+    env_file: ./cloud/.env
+    volumes:
+      - ./logs:/pymetrics/logs
+      - /pymetrics/logs/sys_info
+      - logs:/pymetrics.logs
+
+volumes:
+   logs:
