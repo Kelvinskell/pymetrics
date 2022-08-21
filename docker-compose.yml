@@ -5,9 +5,12 @@ services:
     container_name: pymetrics
     env_file: ./cloud/.env
     volumes:
+      # Bind Mount
       - ./logs:/pymetrics/logs
+      # Anonymous Volume
       - /pymetrics/logs/sys_info
-      - logs:/pymetrics.logs
+      # Named Volume
+      - logs:/pymetrics/logs
 
 volumes:
    logs:
