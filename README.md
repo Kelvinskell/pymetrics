@@ -131,6 +131,9 @@ Execute **`docker run -it --env-file ./cloud/.env -e OPTION='-f json' kelvinskel
 You can also run the container in detached mode:
 Execute `docker run -d  --env-file ./cloud/.env kelvinskell/pymetrics:latest`
 
+#### Run with docker-compose
+If you have docker-compose installed on your system, you could easily create and run your containers by executing **`docker-compose up`**
+
 Use `docker logs CONTAINER_NAME` to check your container for error output, if any. 
 
 **If program execution is successful, no output will be printed to the screen.**
