@@ -91,7 +91,7 @@ This is stored in the *access.log* file.
 ### Local Installation
 
 **To be able to use this application;**
- - clone this repository to your local system (`git clone https://github.com/Kelvinskell/pymetrics.git` or `git clone git@github.com:Kelvinskell/pymetrics.git`). 
+ - clone this repository to your local system (`git clone https://github.com/Kelvinskell/pymetrics.git` or `git clone git@github.com:Kelvinskell/pymetrics.git`) 
  - Switch (`cd`) into the cloned repository (*pymetrics*) and execute the **main.py** file by running either `python3 main.py` or `./main.py` on your terminal.
  - You can further create an alias to simplify things. 
  - Install the necessary modules. You can use `pip install <module>` or any other methods. 
